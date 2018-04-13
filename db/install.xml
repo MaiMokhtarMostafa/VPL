@@ -138,7 +138,7 @@
         <FIELD NAME="title" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="discrption" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="time" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="status" TYPE="binary" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="status" TYPE="int" LENGTH="2" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="vpl_submissions_id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
       </FIELDS>
       <KEYS>

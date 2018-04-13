@@ -38,7 +38,8 @@ require_once(dirname(__FILE__).'/grade_form.php');
 require_once(dirname(__FILE__).'/../vpl.class.php');
 require_once(dirname(__FILE__).'/../vpl_submission.class.php');
 require_once(dirname(__FILE__).'/../views/sh_factory.class.php');
-
+//require_once(dirname(__FILE__).'/../vpl_manage_view.class.php');
+//require_once(dirname(__FILE__).'/vpl_code.class.php');
 global $CFG, $USER;
 
 require_login();
@@ -110,6 +111,8 @@ if ($USER->id == $userid) {
 vpl_sh_factory::include_js();
 $vpl->print_header( get_string( 'submissionview', VPL ) );
 $vpl->print_view_tabs( basename( __FILE__ ) );
+
+
 // Display submission.
 
 
