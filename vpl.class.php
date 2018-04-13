@@ -1576,7 +1576,7 @@ class mod_vpl {
                 }
                 if ($active == 'submission.php' || $active == 'edit.php'
                     || $active == 'submissionview.php' || $active == 'gradesubmission.php'
-                    || $active == 'previoussubmissionslist.php') {
+                    || $active == 'previoussubmissionslist.php' || $active == 'socialCodes.php') {
                     $tabname = $active;
                 } else {
                     $tabname = 'test';
@@ -1585,6 +1585,12 @@ class mod_vpl {
                 $maintabs [] = new tabobject( $tabname, $href, $text, $text );
             }
         }
+
+
+
+
+
+
         switch ($active) {
             case 'view.php' :
                 if ($level2) {
@@ -1600,6 +1606,8 @@ class mod_vpl {
             case 'edit.php' :
             case 'submissionview.php' :
             case 'gradesubmission.php' :
+
+            case 'socialCodes.php' :
             case 'previoussubmissionslist.php' :
                 require_once('vpl_submission.class.php');
                 $subinstance = $this->last_user_submission( $userid );
@@ -1623,6 +1631,7 @@ class mod_vpl {
                     }
                     $tabs [] = new tabobject( 'edit.php', $href, $stredit, $stredit );
                 }
+
                 if (! $example) {
                     $href = vpl_mod_href( 'forms/submissionview.php', 'id', $cmid, 'userid', $userid );
                     $tabs [] = new tabobject( 'submissionview.php', $href, $strsubmissionview, $strsubmissionview );
@@ -1639,7 +1648,18 @@ class mod_vpl {
                         $href = vpl_mod_href( 'views/previoussubmissionslist.php', 'id', $cmid, 'userid', $userid );
                         $tabs [] = new tabobject( 'previoussubmissionslist.php', $href, $strlistprevoiussubmissions,
                                 $strlistprevoiussubmissions );
+
                     }
+
+
+
+                }
+                if(!$level2)
+                {
+                    $strothercodes = 'Other Students Codes';
+                    $href = vpl_mod_href( 'forms/socialCodes.php', 'id', $cmid, 'userid', $userid );
+                    $tabs [] = new tabobject( 'socialCodes.php', $href, $strothercodes,
+                        $strothercodes );
                 }
                 // Show user picture if this activity require password.
                 if (! isset( $user ) && $this->instance->password > '') {
