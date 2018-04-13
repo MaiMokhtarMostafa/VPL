@@ -46,16 +46,12 @@ class mod_vpl_submission_form extends moodleform {
         $mform->setType( 'id', PARAM_INT );
         $mform->addElement( 'hidden', 'userid', 0 );
         $mform->setType( 'userid', PARAM_INT );
-        // Title.
-        //should cheack get_string for title
-        $mform->addElement( 'textarea', 'title', 'Title', array (
-                'cols' => '25',
-                'rows' => 1
-        ) );
-        $mform->setType( 'title', PARAM_LANG );
+        
 
-        
-        
+       // Title.
+       $mform->addElement('text', 'name', get_string('title', VPL), $attributes='size="20"');
+        $mform->setType( 'title', PARAM_LANG );
+ 
         // Description.
         $mform->addElement( 'textarea', 'description', get_string( 'description', VPL ), array (
                 'cols' => '40',
@@ -66,8 +62,8 @@ class mod_vpl_submission_form extends moodleform {
         //Status
         $radioarray=array();
         $mform->addElement('static', 'status', 'Status');
-        $radioarray[] = $mform->createElement('radio', 'status', '', 'Public', 1, $attributes);
-        $radioarray[] = $mform->createElement('radio', 'status', '', 'Private', 0, $attributes);
+        $radioarray[] = $mform->createElement('radio', 'status', '', get_string('public',VPL), 1, $attributes);
+        $radioarray[] = $mform->createElement('radio', 'status', '',get_string('private',VPL) ,0, $attributes);
         $mform->addGroup($radioarray, 'radioar', '', array(' '), false);
 
         
