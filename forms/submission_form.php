@@ -48,10 +48,7 @@ class mod_vpl_submission_form extends moodleform {
         $mform->setType( 'userid', PARAM_INT );
         // Title.
         //should cheack get_string for title
-        $mform->addElement( 'textarea', 'title', 'Title', array (
-                'cols' => '25',
-                'rows' => 1
-        ) );
+       $mform->addElement('text', 'name', get_string('title', VPL), $attributes='size="20"');
         $mform->setType( 'title', PARAM_LANG );
 
         
