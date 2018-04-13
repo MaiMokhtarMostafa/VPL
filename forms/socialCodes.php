@@ -36,6 +36,7 @@ require_login();
 $id = required_param( 'id', PARAM_INT );
 $userid = optional_param( 'userid', false, PARAM_INT );
 $vpl = new mod_vpl( $id );
+$current_instance = $vpl->get_instance();
 
 
 $PAGE->requires->css('/mod/vpl/css/jquery.dataTables.min.css',true);
@@ -47,7 +48,7 @@ $PAGE->requires->js('/mod/vpl/jscript/jquery.dataTables.min.js',true);
 $vpl->print_header( get_string( 'submissionview', VPL ) );
 $vpl->print_view_tabs( basename( __FILE__ ) );
 // Display submission.
-
+        
 echo '
 <div class="container">
     <!-- Modal -->
@@ -61,9 +62,13 @@ echo '
                     <h4 class="modal-title">Modal Header</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Some text in the modal.</p>
-                </div>
-                <div class="modal-footer">
+                    <p>'.mod_vpl_manage_view::print_submission_Description(1).'</p>
+                </div>';
+                    $subinstance=mod_vpl_manage_view::print_submission_by_ID(1);
+                    $submission = new mod_vpl_submission( $vpl,$subinstance );
+                    $submission->get_submitted_fgm()->print_files();
+                        
+                echo '<div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -73,7 +78,7 @@ echo '
 </div>
 
 <div class="table-responsive">
-    <table id="test" class="table table-hover table-bordered" width="100%" cellspacing="0">
+    <table id="codes" class="table table-hover table-bordered" width="100%" cellspacing="0">
         <thead>
             <tr>
                 <th style="text-align: center;">User name</th>
@@ -83,15 +88,17 @@ echo '
             </tr>
         </thead>
         <tbody>';
-         $codes=mod_vpl_manage_view::load_information_codes(1);
+        // loading all public codes
+         $codes=mod_vpl_manage_view::load_information_codes($current_instance->id);
          foreach($codes as $code)
          {
+             print_r($code);
              echo '<tr>';
              echo '<td>'.$code->name.'</td>';
              echo '<td>' .$code->title .'</td>';
              echo '<td>' . $code->time .'</td>';
              echo '<td id="action" style="text-align: center;">
-                    <a data-toggle="modal" data-target="#myModal" href="javascript:void(0)" title="View"><img src="../icons/view.png" alt="view"></a>
+                    <a href="javascript:LoadCode(' . $code->vpl_submissions_id . ')" title="View"><img src="../icons/view.png" alt="view"></a>
                 </td>
             </tr>';
              
@@ -105,8 +112,23 @@ echo '
 
 echo "
     <script>
+        function LoadCode(vpl_submissions_id){
+            console.log(vpl_submissions_id);
+        }
+    </script>
+";
+
+echo "
+    <script>
         $(document).ready( function () {
-            //$('#test').DataTable();
+            $('#codes').DataTable({
+                'columns': [
+                    { 'width': '20%' },
+                    { 'width': '20%' },
+                    { 'width': '20%' },
+                    { 'width': '20%' }
+                ]
+            });
             console.log('Hello');
         });
     </script>
