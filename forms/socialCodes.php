@@ -23,15 +23,6 @@
  * @author Juan Carlos Rodríguez-del-Pino <jcrodriguez@dis.ulpgc.es>
  */
 
-/*require_once(__DIR__ . '/../../../config.php');
-$PAGE->requires->js(new moodle_url('https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js'),true);
-
-$PAGE->requires->js(new moodle_url('https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css'),true);
-
-$PAGE->requires->js(new moodle_url('https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js'),true);*/
-
-
-
 require_once(__DIR__ . '/../../../config.php');
 require_once(dirname(__FILE__).'/../locallib.php');
 require_once(dirname(__FILE__).'/grade_form.php');
@@ -39,7 +30,6 @@ require_once(dirname(__FILE__).'/../vpl.class.php');
 require_once(dirname(__FILE__).'/../vpl_submission.class.php');
 require_once(dirname(__FILE__).'/../views/sh_factory.class.php');
 require_once(dirname(__FILE__).'/../vpl_manage_view.class.php');
-//require_once(dirname(__FILE__).'/vpl_code.class.php');
 global $CFG, $USER;
 
 require_login();
@@ -48,133 +38,78 @@ $userid = optional_param( 'userid', false, PARAM_INT );
 $vpl = new mod_vpl( $id );
 
 
-echo '<link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"  rel="stylesheet" type="text/css">';
-echo '<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous">';
-echo '</script>';
+$PAGE->requires->css('/mod/vpl/css/jquery.dataTables.min.css',true);
+$PAGE->requires->js('/mod/vpl/jscript/jquery-3.3.1.min.js',true);
+$PAGE->requires->js('/mod/vpl/jscript/jquery.dataTables.min.js',true);
 
-//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css
 
-echo '<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js">';
-echo '</script>';
-
-/*if ($userid) {
-    $vpl->prepare_page( 'forms/submissionview.php', array (
-        'id' => $id,
-        'userid' => $userid
-    ) );
-} else {
-    $vpl->prepare_page( 'forms/submissionview.php', array (
-        'id' => $id
-    ) );
-}
-if (! $vpl->is_visible()) {
-    \mod_vpl\event\vpl_security::log( $vpl );
-    vpl_redirect( '?id=' . $id, get_string( 'notavailable' ) );
-}
-$course = $vpl->get_course();
-$instance = $vpl->get_instance();
-
-$submissionid = optional_param( 'submissionid', false, PARAM_INT );
-// Read records.
-if ($userid && $userid != $USER->id) {
-    // Grader.
-    $vpl->require_capability( VPL_GRADE_CAPABILITY );
-    $grader = true;
-    if ($submissionid) {
-        $subinstance = $DB->get_record( 'vpl_submissions', array (
-            'id' => $submissionid
-        ) );
-    } else {
-        $subinstance = $vpl->last_user_submission( $userid );
-    }
-} else {
-    // View own submission.
-    $vpl->require_capability( VPL_VIEW_CAPABILITY );
-    $userid = $USER->id;
-    $grader = false;
-    if ($submissionid && $vpl->has_capability( VPL_GRADE_CAPABILITY )) {
-        $subinstance = $DB->get_record( 'vpl_submissions', array (
-            'id' => $submissionid
-        ) );
-    } else {
-        $subinstance = $vpl->last_user_submission( $userid );
-    }
-}
-if ($subinstance != null && $subinstance->vpl != $vpl->get_instance()->id) {
-    print_error( 'invalidcourseid' );
-}
-if ($USER->id == $userid) {
-    $vpl->restrictions_check();
-}*/
 // Print header.
-vpl_sh_factory::include_js();
 $vpl->print_header( get_string( 'submissionview', VPL ) );
 $vpl->print_view_tabs( basename( __FILE__ ) );
-
-
 // Display submission.
 
-
-// Check consistence.
-/*if (! $subinstance) {
-    vpl_redirect(vpl_mod_href( 'view.php', 'id', $id, 'userid', $userid ),
-        get_string( 'nosubmission', VPL ));
-}
-$submissionid = $subinstance->id;
-
-if ($vpl->is_inconsistent_user( $subinstance->userid, $userid )) {
-    print_error( 'vpl submission user inconsistence' );
-}
-if ($vpl->get_instance()->id != $subinstance->vpl) {
-    print_error( 'vpl submission vpl inconsistence' );
-}
-
-$submission = new mod_vpl_submission( $vpl, $subinstance );
-
-if ($vpl->get_visiblegrade() || $vpl->has_capability( VPL_GRADE_CAPABILITY )) {
-    if ($submission->is_graded()) {
-        echo '<h2>' . get_string( 'grade' ) . '</h2>';
-        $submission->print_grade( true );
-    }
-}
-$vpl->print_variation( $subinstance->userid );
-$submission->print_submission();*/
-
 echo '
-<table id="test" style="width:100%">
-  <tr>
-    <th>Firstname</th>
-    <th>Lastname</th>
-    <th>Age</th>
-  </tr>
-  <tr>
-    <td>Jill</td>
-    <td>Smith</td>
-    <td>50</td>
-  </tr>
-  <tr>
-    <td>Eve</td>
-    <td>Jackson</td>
-    <td>94</td>
-  </tr>
-</table>';
+<div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
 
-echo '<script>';
-echo "$(document).ready( function () {
-        $('#test').DataTable();
-        console.log('Hello');
-    } );";
-echo '</script>';
+          <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Some text in the modal.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
 
-$submission_ID=8;
-// print code by submission id
-$submission = mod_vpl_manage_view::print_submission_by_ID($submission_ID);
-$submission = new mod_vpl_submission( $vpl,$submission );
-$submission->get_submitted_fgm()->print_files();
+        </div>
+    </div>
+</div>
 
-echo mod_vpl_manage_view::print_submission_Description($submission_ID);
+<div class="table-responsive">
+    <table id="test" class="table table-hover table-bordered" width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th style="text-align: center;">User name</th>
+                <th style="text-align: center;">Title</th>
+                <th style="text-align: center;">Submitted At</th>
+                <th style="text-align: center;">Action</th>
+            </tr>
+        </thead>
+        <tbody>';
+         $codes=mod_vpl_manage_view::load_information_codes(1);
+         foreach($codes as $code)
+         {
+             echo '<tr>';
+             echo '<td>'.$code->name.'</td>';
+             echo '<td>' .$code->title .'</td>';
+             echo '<td>' . $code->time .'</td>';
+             echo '<td id="action" style="text-align: center;">
+                    <a data-toggle="modal" data-target="#myModal" href="javascript:void(0)" title="View"><img src="../icons/view.png" alt="view"></a>
+                </td>
+            </tr>';
+             
+         }
+            
+           
+ echo'      </tbody>
+    </table>
+</div>
+';
+
+echo "
+    <script>
+        $(document).ready( function () {
+            //$('#test').DataTable();
+            console.log('Hello');
+        });
+    </script>
+";
 
 $vpl->print_footer();
-//\mod_vpl\event\submission_viewed::log( $submission );
-//vpl_sh_factory::syntaxhighlight();
