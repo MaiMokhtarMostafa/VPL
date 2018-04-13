@@ -38,7 +38,7 @@ require_once(dirname(__FILE__).'/grade_form.php');
 require_once(dirname(__FILE__).'/../vpl.class.php');
 require_once(dirname(__FILE__).'/../vpl_submission.class.php');
 require_once(dirname(__FILE__).'/../views/sh_factory.class.php');
-//require_once(dirname(__FILE__).'/../vpl_manage_view.class.php');
+require_once(dirname(__FILE__).'/../vpl_manage_view.class.php');
 //require_once(dirname(__FILE__).'/vpl_code.class.php');
 global $CFG, $USER;
 
@@ -166,6 +166,14 @@ echo "$(document).ready( function () {
         console.log('Hello');
     } );";
 echo '</script>';
+
+$submission_ID=8;
+// print code by submission id
+$submission = mod_vpl_manage_view::print_submission_by_ID($submission_ID);
+$submission = new mod_vpl_submission( $vpl,$submission );
+$submission->get_submitted_fgm()->print_files();
+
+echo mod_vpl_manage_view::print_submission_Description($submission_ID);
 
 $vpl->print_footer();
 //\mod_vpl\event\submission_viewed::log( $submission );

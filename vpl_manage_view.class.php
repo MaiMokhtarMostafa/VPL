@@ -39,7 +39,7 @@ class mod_vpl_manage_view {
 
 
 
-    public function load_information_codes($vpl_id)
+    public static function load_information_codes($vpl_id)
     {
 
         global $DB;
@@ -85,6 +85,23 @@ class mod_vpl_manage_view {
         return $codes;
     }
 
+    public static function print_submission_by_ID($submission_id) {
+        global $DB;
+        $subinstance2 = $DB->get_record( 'vpl_submissions', array (
+                'id' => $submission_id
+        ) );
+         return $subinstance2;
+    }
+    
+    public static function print_submission_Description($submission_id) {
+        global $DB;
+        $subinstance2 = $DB->get_record( 'vpl_code', array (
+                'vpl_submissions_id' => $submission_id
+        ) );
+        
+        $subinstance2 = json_decode(json_encode($subinstance2), True);
+        return $subinstance2['discrption'];
+    }
 
 }
 ?>
