@@ -56,7 +56,7 @@ class mod_vpl_manage_view {
             $user=$DB->get_records('user', $parms);
 
 
-            $parms = array('vpl_submissions_id' => $vpl_submission['id']);
+            $parms = array('vpl_submissions_id' => $vpl_submission['id'], 'status' => 1);
             $information_code=$DB->get_records('vpl_code', $parms);
 
 
@@ -70,6 +70,7 @@ class mod_vpl_manage_view {
                 $code->id     = $item_of_information_code['id'];
                 $code->title  = $item_of_information_code['title'];
                 $code->time   = $item_of_information_code['time'];
+                $code->vpl_submissions_id = $item_of_information_code['vpl_submissions_id'];
                 foreach ($user as $item_of_user)
                 {
                     $code->name = $item_of_user['firstname'] .' '. $item_of_user['lastname'];
