@@ -1585,7 +1585,7 @@ class mod_vpl {
                 }
                 if ($active == 'submission.php' || $active == 'edit.php'
                     || $active == 'submissionview.php' || $active == 'gradesubmission.php'
-                    || $active == 'previoussubmissionslist.php' || $active == 'socialCodes.php') {
+                    || $active == 'previoussubmissionslist.php' || $active == 'socialCodes.php' || $active== 'studentuserhelp.php' || $active == 'teacheruserhelp.php') {
                     $tabname = $active;
                 } else {
                     $tabname = 'test';
@@ -1615,7 +1615,8 @@ class mod_vpl {
             case 'edit.php' :
             case 'submissionview.php' :
             case 'gradesubmission.php' :
-
+            case 'studentuserhelp.php':
+            case 'teacheruserhelp.php':
             case 'socialCodes.php' :
             case 'previoussubmissionslist.php' :
                 require_once('vpl_submission.class.php');
@@ -1663,13 +1664,22 @@ class mod_vpl {
 
 
                 }
+                /* Our work */
                 if(!$level2)
                 {
-                    $strothercodes = 'Other Students Codes';
+                    // adding Other students codes tab
+                    $strothercodes = 'Other Students public Codes';
                     $href = vpl_mod_href( 'forms/socialCodes.php', 'id', $cmid, 'userid', $userid );
                     $tabs [] = new tabobject( 'socialCodes.php', $href, $strothercodes,
                         $strothercodes );
+                    
+                    // adding user help
+                    $strothercodes = 'User help';
+                    $href = vpl_mod_href( 'forms/studentuserhelp.php', 'id', $cmid, 'userid', $userid );
+                    $tabs [] = new tabobject( 'studentuserhelp.php', $href, $strothercodes,
+                        $strothercodes );
                 }
+                /* End Our work */
                 // Show user picture if this activity require password.
                 if (! isset( $user ) && $this->instance->password > '') {
                     $user = $DB->get_record( 'user', array (
@@ -1682,6 +1692,12 @@ class mod_vpl {
                     echo '</div>';
                 }
                 if ($level2) {
+                    // adding teacher user help
+                    $strothercodes = 'User help';
+                    $href = vpl_mod_href( 'forms/teacheruserhelp.php', 'id', $cmid, 'userid', $userid );
+                    $tabs [] = new tabobject( 'teacheruserhelp.php', $href, $strothercodes,
+                        $strothercodes );
+                    
                     print_tabs(
                             array (
                                     $maintabs,
