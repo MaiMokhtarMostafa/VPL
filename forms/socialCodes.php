@@ -99,7 +99,6 @@ echo '
         <tbody>';
         // loading all public codes
          $codes = mod_vpl_manage_view::load_information_codes($current_instance->id);
-print_r($codes);
          foreach($codes as $code)
          {
             $desc = mod_vpl_manage_view::print_submission_Description($code->vpl_submissions_id);
