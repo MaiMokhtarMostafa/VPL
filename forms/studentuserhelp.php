@@ -40,7 +40,7 @@ $vpl->print_view_tabs( basename( __FILE__ ) );
 
 echo ' 
 <!-- start FAQ intro -->
-<div style="margin-left: -250px">
+<div>
     <section class="faq text-center">
         <div class="container">
             <h1>User Help</h1>
