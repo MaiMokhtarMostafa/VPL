@@ -43,8 +43,23 @@ class mod_vpl_manage_view {
     {
 
         global $DB;
-        $parms = array('vpl' => $vpl_id);
-        $vpl_submissions = $DB->get_records('vpl_submissions', $parms);
+        //$parms = array('vpl' => $vpl_id);
+        //$vpl_submissions = $DB->get_records('vpl_submissions', $parms);
+        $user_ids = $DB->get_records_sql('SELECT distinct userid FROM {vpl_submissions} WHERE vpl = ? ', array( $vpl_id ));
+        $user_ids = json_decode(json_encode($user_ids), True);
+
+        $vpl_submissions=array();
+        foreach ($user_ids as $user_id)
+        {
+            $parms = array('userid' => $user_id['userid'], 'id' => 'max(id)');
+            $temps = $DB->get_records_sql('SELECT  * FROM {vpl_submissions} WHERE userid = ? ORDER BY id desc LIMIT 1', array( $user_id['userid'] ));
+            foreach ($temps as $temp)
+            {
+                $vpl_submissions []=$temp;
+            }
+
+        }
+
 
         $codes = array();
 
@@ -52,6 +67,7 @@ class mod_vpl_manage_view {
 
 
             $vpl_submission = json_decode(json_encode($vpl_submission), True);
+
             $parms = array('id' => $vpl_submission['userid']);
             $user=$DB->get_records('user', $parms);
 

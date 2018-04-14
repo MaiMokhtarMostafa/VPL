@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b339c5cc-9c89-4d37-b70e-bb336a6340b4" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/forms/submission_form.php" beforeDir="false" afterPath="$PROJECT_DIR$/forms/submission_form.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vpl_manage_view.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/vpl_manage_view.class.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,11 +17,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="vpl_manage_view.class.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="vpl_manage_view.class.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vpl_manage_view.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="55" column="34" lean-forward="true" selection-start-line="55" selection-start-column="34" selection-end-line="55" selection-end-column="34" />
+            <state relative-caret-position="482">
+              <caret line="69" lean-forward="true" selection-start-line="69" selection-end-line="69" />
             </state>
           </provider>
         </entry>
@@ -34,10 +35,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="submission_form.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="submission_form.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/forms/submission_form.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
+            <state relative-caret-position="153">
               <caret line="55" column="66" selection-start-line="55" selection-start-column="66" selection-end-line="55" selection-end-column="66" />
             </state>
           </provider>
@@ -61,8 +62,8 @@
       <file leaf-file-name="socialCodes.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/forms/socialCodes.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="31" column="64" selection-start-line="31" selection-start-column="64" selection-end-line="31" selection-end-column="64" />
+            <state relative-caret-position="146">
+              <caret line="66" column="39" lean-forward="true" selection-start-line="66" selection-start-column="39" selection-end-line="66" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -91,9 +92,9 @@
         <option value="$PROJECT_DIR$/vpl_code.class.php" />
         <option value="$PROJECT_DIR$/classes/event/submission_grade_updated.php" />
         <option value="$PROJECT_DIR$/forms/socialCodes.php" />
-        <option value="$PROJECT_DIR$/vpl_manage_view.class.php" />
         <option value="$PROJECT_DIR$/forms/gradesubmission.php" />
         <option value="$PROJECT_DIR$/forms/submission_form.php" />
+        <option value="$PROJECT_DIR$/vpl_manage_view.class.php" />
       </list>
     </option>
   </component>
@@ -106,7 +107,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="10" />
     <option name="y" value="20" />
     <option name="width" value="1346" />
@@ -177,12 +178,12 @@
       <option name="presentableId" value="Default" />
       <updated>1523633910767</updated>
       <workItem from="1523633923766" duration="2395000" />
-      <workItem from="1523636400117" duration="16204000" />
+      <workItem from="1523636400117" duration="23039000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18599000" />
+    <option name="totallyTimeSpent" value="25434000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -332,20 +333,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/forms/socialCodes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="31" column="64" selection-start-line="31" selection-start-column="64" selection-end-line="31" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vpl_manage_view.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="55" column="34" lean-forward="true" selection-start-line="55" selection-start-column="34" selection-end-line="55" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lang/en/vpl.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="184">
@@ -368,8 +355,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/forms/submission_form.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
+        <state relative-caret-position="153">
           <caret line="55" column="66" selection-start-line="55" selection-start-column="66" selection-end-line="55" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/forms/socialCodes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="146">
+          <caret line="66" column="39" lean-forward="true" selection-start-line="66" selection-start-column="39" selection-end-line="66" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vpl_manage_view.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="482">
+          <caret line="69" lean-forward="true" selection-start-line="69" selection-end-line="69" />
         </state>
       </provider>
     </entry>
