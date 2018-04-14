@@ -49,7 +49,8 @@ class mod_vpl_code {
         $record = new stdClass();
         $record->title = $title;
         $record->discrption = $discrption;
-        $record->time=time();
+        $date = date ('Y-m-d H:i:s', time());
+        $record->time=$date;
         $record->status=$status;
         $record->vpl_submissions_id = $vpl_submissions_id;
         $code_id =  $DB->insert_record('vpl_code', $record, TRUE);
