@@ -29,6 +29,7 @@ require_once(dirname(__FILE__).'/grade_form.php');
 require_once(dirname(__FILE__).'/../vpl.class.php');
 require_once(dirname(__FILE__).'/../vpl_submission.class.php');
 require_once(dirname(__FILE__).'/../views/sh_factory.class.php');
+require_once(dirname(__FILE__).'/../vpl_manage_view.class.php');
 
 global $CFG, $USER;
 
@@ -115,7 +116,14 @@ if ($vpl->get_visiblegrade() || $vpl->has_capability( VPL_GRADE_CAPABILITY )) {
     }
 }
 $vpl->print_variation( $subinstance->userid );
-$submission->print_submission();
+
+echo '<h2>Title</h2>';
+echo '<h4>'.mod_vpl_manage_view::print_submission_Title($submissionid).'</h4>';
+echo '<h2>Description</h2>';
+echo '<p>'.mod_vpl_manage_view::print_submission_Description($submissionid).'</p>';
+$vpl_submissions=mod_vpl_manage_view::print_submission_by_ID($submissionid);
+$subinstancevpl_submissions=new mod_vpl_submission($vpl,$vpl_submissions);
+$subinstancevpl_submissions->get_submitted_fgm()->print_files();
 $vpl->print_footer();
 \mod_vpl\event\submission_viewed::log( $submission );
 vpl_sh_factory::syntaxhighlight();

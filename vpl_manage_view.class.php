@@ -32,13 +32,6 @@ require_once(dirname(__FILE__).'/vpl_code.class.php');
 
 class mod_vpl_manage_view {
 
-
-
-
-
-
-
-
     public static function load_information_codes($vpl_id)
     {
 
@@ -118,6 +111,17 @@ class mod_vpl_manage_view {
         
         $subinstance2 = json_decode(json_encode($subinstance2), True);
         return $subinstance2['discrption'];
+    }
+
+
+    public static function print_submission_Title($submission_id) {
+        global $DB;
+        $subinstance2 = $DB->get_record( 'vpl_code', array (
+            'vpl_submissions_id' => $submission_id
+        ) );
+
+        $subinstance2 = json_decode(json_encode($subinstance2), True);
+        return $subinstance2['title'];
     }
 
 }
