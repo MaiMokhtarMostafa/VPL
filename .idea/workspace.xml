@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b339c5cc-9c89-4d37-b70e-bb336a6340b4" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forms/socialCodes.php" beforeDir="false" afterPath="$PROJECT_DIR$/forms/socialCodes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forms/submission_form.php" beforeDir="false" afterPath="$PROJECT_DIR$/forms/submission_form.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,11 +17,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="vpl_manage_view.class.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="vpl_manage_view.class.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vpl_manage_view.class.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
               <caret line="55" column="34" lean-forward="true" selection-start-line="55" selection-start-column="34" selection-end-line="55" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gradesubmission.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/forms/gradesubmission.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="697">
+              <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="submission_form.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/forms/submission_form.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="58" column="8" selection-start-line="58" selection-start-column="8" selection-end-line="58" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -59,6 +77,8 @@
         <option value="$PROJECT_DIR$/classes/event/submission_grade_updated.php" />
         <option value="$PROJECT_DIR$/forms/socialCodes.php" />
         <option value="$PROJECT_DIR$/vpl_manage_view.class.php" />
+        <option value="$PROJECT_DIR$/forms/gradesubmission.php" />
+        <option value="$PROJECT_DIR$/forms/submission_form.php" />
       </list>
     </option>
   </component>
@@ -131,12 +151,12 @@
       <option name="presentableId" value="Default" />
       <updated>1523633910767</updated>
       <workItem from="1523633923766" duration="2395000" />
-      <workItem from="1523636400117" duration="14272000" />
+      <workItem from="1523636400117" duration="15616000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16667000" />
+    <option name="totallyTimeSpent" value="18011000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -257,13 +277,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/forms/gradesubmission.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1918">
-          <caret line="138" column="16" selection-start-line="138" selection-start-column="16" selection-end-line="138" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/classes/event/submission_grade_updated.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -300,10 +313,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/forms/gradesubmission.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="697">
+          <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/vpl_manage_view.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="55" column="34" lean-forward="true" selection-start-line="55" selection-start-column="34" selection-end-line="55" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/forms/submission_form.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="58" column="8" selection-start-line="58" selection-start-column="8" selection-end-line="58" selection-end-column="8" />
         </state>
       </provider>
     </entry>

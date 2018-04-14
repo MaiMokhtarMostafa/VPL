@@ -53,10 +53,10 @@ class mod_vpl_submission_form extends moodleform {
 
 
         // Title.
-        $mform->addElement('textarea', 'title', get_string('title', VPL), array(
-            'cols' => '20',
-            'rows' => 1
+        $mform->addElement('text', 'title', get_string('forumname', 'forum'),  array(
+            'size'=>'20'
         ));
+        
         $mform->setType('title', PARAM_TEXT);
 
         // Description.
