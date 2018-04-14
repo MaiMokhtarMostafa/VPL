@@ -44,11 +44,19 @@ $PAGE->requires->js('/mod/vpl/jscript/jquery-3.3.1.min.js',true);
 $PAGE->requires->js('/mod/vpl/jscript/jquery.dataTables.min.js',true);
 
 
+if(isset($_POST['vpl_submissions_id'])){
+    $vpl_submissions_id = $_POST['vpl_submissions_id'];
+    $subinstance=mod_vpl_manage_view::print_submission_by_ID($vpl_submissions_id);
+    $submission = new mod_vpl_submission( $vpl,$subinstance );
+    $code = $submission->get_submitted_fgm()->print_files();
+    die();
+}
+
+
 // Print header.
 $vpl->print_header( get_string( 'submissionview', VPL ) );
 $vpl->print_view_tabs( basename( __FILE__ ) );
 // Display submission.
-        
 echo '
 <div class="container">
     <!-- Modal -->
@@ -59,16 +67,15 @@ echo '
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
+                    <h4 class="modal-title">View Code</h4>
                 </div>
                 <div class="modal-body">
-                    <p>'.mod_vpl_manage_view::print_submission_Description(1).'</p>
-                </div>';
-                    $subinstance=mod_vpl_manage_view::print_submission_by_ID(1);
-                    $submission = new mod_vpl_submission( $vpl,$subinstance );
-                    $submission->get_submitted_fgm()->print_files();
-                        
-                echo '<div class="modal-footer">
+                    <h2>Description:</h2>
+                    <p id="Description"></p>
+                    <h2>Code:</h2>
+                    <div id="code"></div>
+                </div> 
+                <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -76,6 +83,8 @@ echo '
         </div>
     </div>
 </div>
+
+<div id="test"></div>
 
 <div class="table-responsive">
     <table id="codes" class="table table-hover table-bordered" width="100%" cellspacing="0">
@@ -89,19 +98,19 @@ echo '
         </thead>
         <tbody>';
         // loading all public codes
-         $codes=mod_vpl_manage_view::load_information_codes($current_instance->id);
+         $codes = mod_vpl_manage_view::load_information_codes($current_instance->id);
+print_r($codes);
          foreach($codes as $code)
          {
-             print_r($code);
-             echo '<tr>';
-             echo '<td>'.$code->name.'</td>';
-             echo '<td>' .$code->title .'</td>';
-             echo '<td>' . $code->time .'</td>';
-             echo '<td id="action" style="text-align: center;">
-                    <a href="javascript:LoadCode(' . $code->vpl_submissions_id . ')" title="View"><img src="../icons/view.png" alt="view"></a>
-                </td>
-            </tr>';
-             
+            $desc = mod_vpl_manage_view::print_submission_Description($code->vpl_submissions_id);
+            echo '<tr>';
+            echo '<td>'.$code->name.'</td>';
+            echo '<td>' .$code->title .'</td>';
+            echo '<td>' . $code->time .'</td>';
+            echo '<td id="action" style="text-align: center;">
+                <a href="javascript:LoadCode(\'' . $desc . '\', ' . $code->vpl_submissions_id . ')" title="View"><img src="../icons/view.png" alt="view"></a>
+            </td>
+            </tr>';  
          }
             
            
@@ -112,8 +121,18 @@ echo '
 
 echo "
     <script>
-        function LoadCode(vpl_submissions_id){
-            console.log(vpl_submissions_id);
+        function LoadCode(desc, vpl_submissions_id){
+            $.ajax({
+                type: 'POST',
+                dataType: 'html',
+                url: '',
+                data:{vpl_submissions_id:vpl_submissions_id},
+                success: function(data){
+                    $('#Description').html(desc);
+                    $('#code').html(data);
+                    $('#myModal').modal('show'); 
+                }
+            });
         }
     </script>
 ";
@@ -129,7 +148,11 @@ echo "
                     { 'width': '20%' }
                 ]
             });
-            console.log('Hello');
+            $.ajax({
+                type: 'POST',
+                url: '../ajax/test',
+                dataType: 'html',
+            });
         });
     </script>
 ";

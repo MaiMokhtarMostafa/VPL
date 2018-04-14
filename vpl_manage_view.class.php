@@ -57,7 +57,7 @@ class mod_vpl_manage_view {
 
 
             $parms = array('vpl_submissions_id' => $vpl_submission['id'], 'status' => 1);
-            $information_code=$DB->get_records('vpl_code', $parms);
+            $information_code = $DB->get_records('vpl_code', $parms);
 
 
             $information_code = json_decode(json_encode($information_code), True);
