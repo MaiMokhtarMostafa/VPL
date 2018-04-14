@@ -37,8 +37,23 @@
       <file leaf-file-name="submission_form.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/forms/submission_form.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="55" column="37" selection-start-line="55" selection-start-column="37" selection-end-line="55" selection-end-column="37" />
+            <state relative-caret-position="527">
+              <caret line="55" column="66" selection-start-line="55" selection-start-column="66" selection-end-line="55" selection-end-column="66" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="vpl.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lang/en/vpl.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="184">
+              <caret line="45" column="13" selection-start-line="45" selection-start-column="10" selection-end-line="45" selection-end-column="13" />
+              <folding>
+                <element signature="e#46#52#0" expanded="true" />
+                <element signature="e#67#73#0" expanded="true" />
+                <element signature="e#145#151#0" expanded="true" />
+                <element signature="e#169#175#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -60,6 +75,7 @@
       <find>$DB</find>
       <find>$subid</find>
       <find>submission_grade_updated</find>
+      <find>tit</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -90,7 +106,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="10" />
     <option name="y" value="20" />
     <option name="width" value="1346" />
@@ -113,6 +129,17 @@
               <item name="vpl" type="b2602c69:ProjectViewProjectNode" />
               <item name="vpl" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="forms" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="vpl" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vpl" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="lang" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="vpl" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vpl" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="lang" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="en" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
@@ -150,12 +177,12 @@
       <option name="presentableId" value="Default" />
       <updated>1523633910767</updated>
       <workItem from="1523633923766" duration="2395000" />
-      <workItem from="1523636400117" duration="15692000" />
+      <workItem from="1523636400117" duration="16204000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18087000" />
+    <option name="totallyTimeSpent" value="18599000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -312,13 +339,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/forms/gradesubmission.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vpl_manage_view.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -326,10 +346,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lang/en/vpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="45" column="13" selection-start-line="45" selection-start-column="10" selection-end-line="45" selection-end-column="13" />
+          <folding>
+            <element signature="e#46#52#0" expanded="true" />
+            <element signature="e#67#73#0" expanded="true" />
+            <element signature="e#145#151#0" expanded="true" />
+            <element signature="e#169#175#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/forms/gradesubmission.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="697">
+          <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/forms/submission_form.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="55" column="37" selection-start-line="55" selection-start-column="37" selection-end-line="55" selection-end-column="37" />
+        <state relative-caret-position="527">
+          <caret line="55" column="66" selection-start-line="55" selection-start-column="66" selection-end-line="55" selection-end-column="66" />
         </state>
       </provider>
     </entry>
