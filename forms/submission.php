@@ -89,10 +89,12 @@ if ($fromform = $mform->get_data()) {
                 }
             }
             $files [$name] = $data;
+            
         }
     }
     $errormessage = '';
-    if ($subid = $vpl->add_submission( $userid, $files, $fromform->title, $errormessage )) {
+   
+    if ($subid = $vpl->add_submission( $userid, $files, $fromform->title ,$fromform->comments, $fromform->status, $errormessage )) {
         \mod_vpl\event\submission_uploaded::log( array (
                 'objectid' => $subid,
                 'context' => $vpl->get_context(),

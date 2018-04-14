@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of VPL for Moodle - http://vpl.dis.ulpgc.es/
 //
 // VPL for Moodle is free software: you can redistribute it and/or modify
@@ -22,64 +23,71 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @author Juan Carlos Rodríguez-del-Pino <jcrodriguez@dis.ulpgc.es>
  */
+defined('MOODLE_INTERNAL') || die();
 
-defined( 'MOODLE_INTERNAL' ) || die();
-
-require_once($CFG->libdir.'/formslib.php');
-require_once(dirname(__FILE__).'/../locallib.php');
+require_once($CFG->libdir . '/formslib.php');
+require_once(dirname(__FILE__) . '/../locallib.php');
 
 class mod_vpl_submission_form extends moodleform {
+
     protected $vpl;
+
     protected function getinternalform() {
         return $this->_form;
     }
+
     public function __construct($page, $vpl) {
         $this->vpl = $vpl;
-        parent::__construct( $page );
+        parent::__construct($page);
     }
+
     protected function definition() {
         global $CFG;
         $mform = & $this->_form;
-        $mform->addElement( 'header', 'headersubmission', get_string( 'submission', VPL ) );
+        $mform->addElement('header', 'headersubmission', get_string('submission', VPL));
         // Identification info.
-        $mform->addElement( 'hidden', 'id' );
-        $mform->setType( 'id', PARAM_INT );
-        $mform->addElement( 'hidden', 'userid', 0 );
-        $mform->setType( 'userid', PARAM_INT );
-        
+        $mform->addElement('hidden', 'id');
+        $mform->setType('id', PARAM_INT);
+        $mform->addElement('hidden', 'userid', 0);
+        $mform->setType('userid', PARAM_INT);
 
-       // Title.
-       $mform->addElement('text', 'name', get_string('title', VPL), $attributes='size="20"');
-        $mform->setType( 'title', PARAM_LANG );
- 
+
+        // Title.
+        $mform->addElement('textarea', 'title', get_string('title', VPL), array(
+            'cols' => '20',
+            'rows' => 1
+        ));
+        $mform->setType('title', PARAM_TEXT);
+
         // Description.
-        $mform->addElement( 'textarea', 'description', get_string( 'description', VPL ), array (
-                'cols' => '40',
-                'rows' => 2
-        ) );
-        $mform->setType( 'description', PARAM_TEXT );
-        
+        $mform->addElement('textarea', 'comments', get_string('description', VPL), array(
+            'cols' => '40',
+            'rows' => 2
+        ));
+        $mform->setType('comments', PARAM_TEXT);
+
         //Status
-        $radioarray=array();
+        $radioarray = array();
         $mform->addElement('static', 'status', 'Status');
-        $radioarray[] = $mform->createElement('radio', 'status', '', get_string('public',VPL), 1, $attributes);
-        $radioarray[] = $mform->createElement('radio', 'status', '',get_string('private',VPL) ,0, $attributes);
+        $radioarray[] = $mform->createElement('radio', 'status', '', get_string('public', VPL), 1, $attributes);
+        $radioarray[] = $mform->createElement('radio', 'status', '', get_string('private', VPL), 0, $attributes);
         $mform->addGroup($radioarray, 'radioar', '', array(' '), false);
 
-        
-        
+
+
         // Files upload.
         $instance = $this->vpl->get_instance();
         $files = $this->vpl->get_required_files();
-        $nfiles = count( $files );
+        $nfiles = count($files);
         for ($i = 0; $i < $instance->maxfiles; $i ++) {
             $field = 'file' . $i;
             if ($i < $nfiles) {
-                $mform->addElement( 'filepicker', $field, $files [$i] );
+                $mform->addElement('filepicker', $field, $files [$i]);
             } else {
-                $mform->addElement( 'filepicker', $field, get_string( 'anyfile', VPL ) );
+                $mform->addElement('filepicker', $field, get_string('anyfile', VPL));
             }
         }
-        $this->add_action_buttons( true, get_string( 'submit' ) );
+        $this->add_action_buttons(true, get_string('submit'));
     }
+
 }
