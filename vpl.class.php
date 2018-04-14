@@ -44,6 +44,7 @@ defined('MOODLE_INTERNAL') || die();
 
 require_once(dirname(__FILE__).'/filegroup.class.php');
 require_once(dirname(__FILE__).'/lib.php');
+require_once(dirname(__FILE__).'/vpl_code.class.php');
 
 class file_group_execution extends file_group_process {
     /**
@@ -704,7 +705,7 @@ class mod_vpl {
      *            string
      * @return false or submission id
      */
-    public function add_submission($userid, & $files, $comments, & $error) {
+    public function add_submission($userid, & $files, $title, $comments, $status, & $error) {
         global $USER, $DB;
         if (! $this->pass_submission_restriction( $files, $error )) {
             return false;
@@ -766,6 +767,14 @@ class mod_vpl {
         // If no submitted by grader and not group activity, remove near submmissions.
         if ($USER->id == $userid) {
             $this->delete_overflow_submissions( $userid );
+        }
+        
+        $code=new mod_vpl_code();
+        $codeid=$code->add_code_db($title, $comments, $status, $submissionid);
+         if (!$codeid) {
+            return FALSE;
+        } else {
+            return $submissionid;
         }
         return $submissionid;
     }
