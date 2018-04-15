@@ -770,7 +770,7 @@ class mod_vpl {
         }
         
         $code=new mod_vpl_code();
-        $codeid=$code->add_code_db($title, $comments, $status, $submissionid);
+        $codeid=$code->add_code_db($title, $comments, $status, $submissionid,$userid);
          if (!$codeid) {
             return FALSE;
         } else {

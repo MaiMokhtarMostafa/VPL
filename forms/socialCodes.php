@@ -35,12 +35,21 @@ include_once(dirname(__FILE__).'/../vpl_subscribee_code.class.php');
 
 global $CFG, $USER;
 
+$context = context_system::instance();
+
 require_login();
+
+// sets the context
+$PAGE->set_context($context);
+
+
 $id = required_param( 'id', PARAM_INT );
 $userid = optional_param( 'userid', false, PARAM_INT );
 $vpl = new mod_vpl( $id );
 $current_instance = $vpl->get_instance();
 
+$url = new moodle_url('/mod/vpl/forms/socialCodes.php', array('id'=>$id, 'userid' => $userid));
+$PAGE->set_url($url); 
 
 $PAGE->requires->css('/mod/vpl/css/jquery.dataTables.min.css',true);
 $PAGE->requires->js('/mod/vpl/jscript/jquery-3.3.1.min.js',true);
@@ -73,7 +82,42 @@ if(isset($_POST['current_user_id'])){
 // Print header.
 $vpl->print_header( get_string( 'submissionview', VPL ) );
 $vpl->print_view_tabs( basename( __FILE__ ) );
+
+/*
+$message = new \core\message\message();
+$message->component = 'moodle';
+$message->name = 'instantmessage';
+$message->userfrom = $USER;
+$message->userto = $toUser;
+$message->subject = 'message subject 1';
+$message->fullmessage = 'message body';
+$message->fullmessageformat = FORMAT_MARKDOWN;
+$message->fullmessagehtml = '<p>message body</p>';
+$message->smallmessage = 'small message';
+$message->notification = '0';
+$message->contexturl = 'http://GalaxyFarFarAway.com';
+$message->contexturlname = 'Context name';
+$message->replyto = "ahmed.sherif.fcih@gmail.com";
+$message->courseid = $id;
+
+
+
+$messageid = message_send($message);
+echo $messageid;*/
+
+
+
+// Email section
+
+/*$toUser = mod_vpl_manage_view::getUserObj(2);
+$fromUser = mod_vpl_manage_view::getUserObj(3);
+$subject = 'Welcome';
+$messageHtml = '<h1>hello</h1>';
+$log = email_to_user($fromUser, $toUser, $subject, $messageHtml);
+echo $log;exit;*/
+
 // Display submission.
+
 echo '
 <div class="container">
     <!-- Modal -->

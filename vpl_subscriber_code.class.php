@@ -14,7 +14,7 @@ class mod_vpl_subscriber_code implements mod_vpl_subject
     public function unSubscribeObserver($observer)
     {
         global $DB;
-        $conditions=array('subscribee' => $this->id , 'subscriber' => $observer->id);
+        $conditions=array('subscribee' =>$this->id  , 'subscriber' => $observer->id);
         $DB->delete_records('vpl_subscribe', $conditions);
     }
 
@@ -35,8 +35,30 @@ class mod_vpl_subscriber_code implements mod_vpl_subject
 
     public function notifyOpservers()
     {
-
+        $subscribers=$this->get_all_subscribes();
+        $self_user=$this->getUserObj($this->id);
+        foreach($subscribers as $subscriber)
+        {
+            $message = new \core\message\message();
+            $message->component = 'moodle';
+            $message->name = 'instantmessage';
+            $message->userfrom = $self_user;
+            $message->userto = $this->getUserObj($subscriber);
+            $message->subject = 'new public code has been submitted';
+            $message->fullmessage = 'message body';
+            $message->fullmessageformat = FORMAT_MARKDOWN;
+            $message->fullmessagehtml = '<p>message body</p>';
+            $message->smallmessage = $this->desc;
+            $message->notification = '0';
+            $message->contexturl = 'http://GalaxyFarFarAway.com';
+            $message->contexturlname = 'Context name';
+            $message->replyto = "info@example.com";
+            //$message->courseid = $id;
+            message_send($message);
+        }
+        
     }
+    
     public function get_all_subscribes()
     {
         global $DB;
@@ -49,6 +71,19 @@ class mod_vpl_subscriber_code implements mod_vpl_subject
             $subscriber[]= $user['subscribee'];
         }
         return $subscriber;
+    }
+    
+    
+    
+    private function getUserObj($userid){
+        global $DB;
+        $userObj = $DB->get_record( 'user', array (
+                'id' => $userid
+        ));
+        if($userObj){
+            return $userObj;
+        }
+        return false;
     }
 
 

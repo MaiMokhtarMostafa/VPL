@@ -24,6 +24,7 @@
  * @author Juan Carlos Rodríguez-del-Pino <jcrodriguez@dis.ulpgc.es>
  */
 defined('MOODLE_INTERNAL') || die();
+require_once(dirname(__FILE__).'/vpl_subscriber_code.class.php');
 
 class mod_vpl_code {
 
@@ -37,17 +38,10 @@ class mod_vpl_code {
     public $userId;
     public $subscribe;
 
-    public function add_code_db($title, $discrption, $status, $vpl_submissions_id) {
+    public function add_code_db($title, $discrption, $status, $vpl_submissions_id,$userid) {
 
         global $DB;
 
-//        $param = array(
-//            'title' => $title,
-//            'description' => $description,
-//            'time'=>time(),
-//            'status' => $status,
-//            'vpl_submissions_id' => $vpl_submissions_id
-//        );
         $record = new stdClass();
         $record->title = $title;
         $record->discrption = $discrption;
@@ -56,6 +50,8 @@ class mod_vpl_code {
         $record->status=$status;
         $record->vpl_submissions_id = $vpl_submissions_id;
         $code_id =  $DB->insert_record('vpl_code', $record, TRUE);
+        $subscriber=new mod_vpl_subscriber_code($userid);
+        $subscriber->setDesc('new code');
         if (!$code_id) {
             return FALSE;
         } else {
