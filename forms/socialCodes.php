@@ -30,6 +30,9 @@ require_once(dirname(__FILE__).'/../vpl.class.php');
 require_once(dirname(__FILE__).'/../vpl_submission.class.php');
 require_once(dirname(__FILE__).'/../views/sh_factory.class.php');
 require_once(dirname(__FILE__).'/../vpl_manage_view.class.php');
+include_once(dirname(__FILE__).'/../vpl_subscriber_code.class.php');
+include_once(dirname(__FILE__).'/../vpl_subscribee_code.class.php');
+
 global $CFG, $USER;
 
 require_login();
@@ -49,6 +52,20 @@ if(isset($_POST['vpl_submissions_id'])){
     $subinstance=mod_vpl_manage_view::print_submission_by_ID($vpl_submissions_id);
     $submission = new mod_vpl_submission( $vpl,$subinstance );
     $code = $submission->get_submitted_fgm()->print_files();
+    die();
+}
+
+if(isset($_POST['current_user_id'])){
+    $current_user_id = $_POST['current_user_id'];
+    $user_id = $_POST['user_id'];
+    $status = $_POST['status'];
+    $subscriber= new mod_vpl_subscriber_code($user_id);
+    $subscribee= new mod_vpl_subscribee_code($subscriber , $current_user_id);
+    if($status){
+        $subscribee->subscribe();
+    } else {
+        $subscribee->unsubscribe();
+    }
     die();
 }
 
@@ -98,7 +115,7 @@ echo '
         </thead>
         <tbody>';
         // loading all public codes
-         $codes = mod_vpl_manage_view::load_information_codes($current_instance->id);
+         $codes = mod_vpl_manage_view::load_information_codes($current_instance->id, $userid);
          foreach($codes as $code)
          {
             $desc = mod_vpl_manage_view::print_submission_Description($code->vpl_submissions_id);
@@ -107,8 +124,13 @@ echo '
             echo '<td>' .$code->title .'</td>';
             echo '<td>' . $code->time .'</td>';
             echo '<td id="action" style="text-align: center;">
-                <a href="javascript:LoadCode(\'' . $desc . '\', ' . $code->vpl_submissions_id . ')" title="View"><img src="../icons/view.png" alt="view"></a>
-            </td>
+                <a href="javascript:LoadCode(\'' . $desc . '\', ' . $code->vpl_submissions_id . ')" title="View"><img src="../icons/view.png" alt="view"></a>';
+             if($code->subscribe){
+                 echo  '<a id="sub-href" href="javascript:subscribe(' . $userid . ', ' . $code->userId . ', 0)" title="UnSubscribe"><img id="sub-image" src="../icons/unsubscribed.png" alt="UnSubscribe"></a>';
+             } else {
+                echo  '<a id="sub-href" href="javascript:subscribe(' . $userid . ', ' . $code->userId . ',1)" title="Subscribe"><img id="sub-image" src="../icons/subscribed.png" alt="Subscribe"></a>';
+             }
+            echo '</td>
             </tr>';  
          }
             
@@ -132,6 +154,28 @@ echo "
                     $('#myModal').modal('show'); 
                 }
             });
+        }
+        
+        function subscribe(current_user_id, user_id,status){
+            $.ajax({
+                type: 'POST',
+                url: '',
+                data:{current_user_id:current_user_id, user_id:user_id, status:status},
+                success: function(data){
+                    
+                }
+            });
+            if(status == 1){
+                $('#sub-image').attr('src', '../icons/unsubscribed.png');
+                $('#sub-image').attr('alt', 'UnSubscribe');
+                $('#sub-href').attr('href', 'javascript:subscribe(2, 3,0)');
+                $('#sub-href').attr('title', 'UnSubscribe');
+            } else {
+                $('#sub-image').attr('src', '../icons/subscribed.png');
+                $('#sub-image').attr('alt', 'Subscribe');
+                $('#sub-href').attr('href', 'javascript:subscribe(2, 3,1)');
+                $('#sub-href').attr('title', 'Subscribe');
+            }
         }
     </script>
 ";

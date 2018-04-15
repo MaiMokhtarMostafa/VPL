@@ -14,7 +14,7 @@ class mod_vpl_subscriber_code implements mod_vpl_subject
     public function unSubscribeObserver($observer)
     {
         global $DB;
-        $conditions=array('subscribee' => $observer->id , 'subscriber' => $this->id);
+        $conditions=array('subscribee' => $this->id , 'subscriber' => $observer->id);
         $DB->delete_records('vpl_subscribe', $conditions);
     }
 
@@ -22,8 +22,8 @@ class mod_vpl_subscriber_code implements mod_vpl_subject
     {
         global $DB;
         $record = new stdClass();
-        $record->subscribee = $observer->id;
-        $record->subscriber=$this->id;
+        $record->subscribee = $this->id;
+        $record->subscriber=$observer->id;
         $DB->insert_record('vpl_subscribe', $record, TRUE);
     }
 
@@ -40,7 +40,7 @@ class mod_vpl_subscriber_code implements mod_vpl_subject
     public function get_all_subscribes()
     {
         global $DB;
-        $parms = array('id' => $this->id);
+        $parms = array('subscriber' => $this->id);
         $users=$DB->get_records('vpl_subscribe', $parms);
         $users = json_decode(json_encode($users), True);
         $subscriber=array();
@@ -54,6 +54,3 @@ class mod_vpl_subscriber_code implements mod_vpl_subject
 
 
 }
-
-
-?>

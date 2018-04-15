@@ -32,9 +32,9 @@ require_once(dirname(__FILE__).'/vpl_subscriber_code.class.php');
 
 class mod_vpl_manage_view {
 
-    public static function load_information_codes($vpl_id)
+    public static function load_information_codes($vpl_id,$userid)
     {
-        $Observer   =   new mod_vpl_subscriber_code(1);
+        $Observer   =   new mod_vpl_subscriber_code($userid);
         $subscriber =   $Observer->get_all_subscribes();
         global $DB;
 
@@ -73,7 +73,7 @@ class mod_vpl_manage_view {
             $user = json_decode(json_encode($user), True);
 
             $code=new mod_vpl_code();
-
+            $self_user=true;
             foreach ($information_code as $item_of_information_code)
             {
                 $code->id     = $item_of_information_code['id'];
@@ -82,6 +82,10 @@ class mod_vpl_manage_view {
                 $code->vpl_submissions_id = $item_of_information_code['vpl_submissions_id'];
                 foreach ($user as $item_of_user)
                 {
+                    if($userid==$item_of_user['id'])
+                    {
+                        $self_user=false;
+                    }
                     $code->name     =   $item_of_user['firstname'] .' '. $item_of_user['lastname'];
                     $code->userId   =   $item_of_user['id'];
                 }
@@ -93,7 +97,12 @@ class mod_vpl_manage_view {
                 {
                     $code->subscribe=0;
                 }
-                $codes[]     =   $code;
+                if($self_user)
+                {
+                    $codes[]     =   $code;
+                }
+                $self_user=true;
+                
             }
 
 
