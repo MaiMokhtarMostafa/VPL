@@ -50,7 +50,9 @@ class mod_vpl_code {
         $record->status=$status;
         $record->vpl_submissions_id = $vpl_submissions_id;
         $code_id =  $DB->insert_record('vpl_code', $record, TRUE);
-        $subscriber=new mod_vpl_subscriber_code($userid);
+        if($status){
+            $subscriber=new mod_vpl_subscriber_code($userid);
+        }
         $subscriber->setDesc('new code');
         if (!$code_id) {
             return FALSE;

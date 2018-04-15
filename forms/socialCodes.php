@@ -83,39 +83,6 @@ if(isset($_POST['current_user_id'])){
 $vpl->print_header( get_string( 'submissionview', VPL ) );
 $vpl->print_view_tabs( basename( __FILE__ ) );
 
-/*
-$message = new \core\message\message();
-$message->component = 'moodle';
-$message->name = 'instantmessage';
-$message->userfrom = $USER;
-$message->userto = $toUser;
-$message->subject = 'message subject 1';
-$message->fullmessage = 'message body';
-$message->fullmessageformat = FORMAT_MARKDOWN;
-$message->fullmessagehtml = '<p>message body</p>';
-$message->smallmessage = 'small message';
-$message->notification = '0';
-$message->contexturl = 'http://GalaxyFarFarAway.com';
-$message->contexturlname = 'Context name';
-$message->replyto = "ahmed.sherif.fcih@gmail.com";
-$message->courseid = $id;
-
-
-
-$messageid = message_send($message);
-echo $messageid;*/
-
-
-
-// Email section
-
-/*$toUser = mod_vpl_manage_view::getUserObj(2);
-$fromUser = mod_vpl_manage_view::getUserObj(3);
-$subject = 'Welcome';
-$messageHtml = '<h1>hello</h1>';
-$log = email_to_user($fromUser, $toUser, $subject, $messageHtml);
-echo $log;exit;*/
-
 // Display submission.
 
 echo '
@@ -170,9 +137,9 @@ echo '
             echo '<td id="action" style="text-align: center;">
                 <a href="javascript:LoadCode(\'' . $desc . '\', ' . $code->vpl_submissions_id . ')" title="View"><img src="../icons/view.png" alt="view"></a>';
              if($code->subscribe){
-                 echo  '<a id="sub-href" href="javascript:subscribe(' . $userid . ', ' . $code->userId . ', 0)" title="UnSubscribe"><img id="sub-image" src="../icons/unsubscribed.png" alt="UnSubscribe"></a>';
+                 echo  '<a id="sub-href-' . $code->userId . '" href="javascript:subscribe(' . $userid . ', ' . $code->userId . ', 0)" title="UnSubscribe"><img id="sub-image-' . $code->userId . '" src="../icons/unsubscribed.png" alt="UnSubscribe"></a>';
              } else {
-                echo  '<a id="sub-href" href="javascript:subscribe(' . $userid . ', ' . $code->userId . ',1)" title="Subscribe"><img id="sub-image" src="../icons/subscribed.png" alt="Subscribe"></a>';
+                echo  '<a id="sub-href-' . $code->userId . '" href="javascript:subscribe(' . $userid . ', ' . $code->userId . ',1)" title="Subscribe"><img id="sub-image-' . $code->userId . '" src="../icons/subscribed.png" alt="Subscribe"></a>';
              }
             echo '</td>
             </tr>';  
@@ -204,21 +171,18 @@ echo "
             $.ajax({
                 type: 'POST',
                 url: '',
-                data:{current_user_id:current_user_id, user_id:user_id, status:status},
-                success: function(data){
-                    
-                }
+                data:{current_user_id:current_user_id, user_id:user_id, status:status}
             });
             if(status == 1){
-                $('#sub-image').attr('src', '../icons/unsubscribed.png');
-                $('#sub-image').attr('alt', 'UnSubscribe');
-                $('#sub-href').attr('href', 'javascript:subscribe(2, 3,0)');
-                $('#sub-href').attr('title', 'UnSubscribe');
+                $('#sub-image-' + user_id).attr('src', '../icons/unsubscribed.png');
+                $('#sub-image-' + user_id).attr('alt', 'UnSubscribe');
+                $('#sub-href-' + user_id).attr('href', 'javascript:subscribe(' + current_user_id + ', ' + user_id + ',0)');
+                $('#sub-href-' + user_id).attr('title', 'UnSubscribe');
             } else {
-                $('#sub-image').attr('src', '../icons/subscribed.png');
-                $('#sub-image').attr('alt', 'Subscribe');
-                $('#sub-href').attr('href', 'javascript:subscribe(2, 3,1)');
-                $('#sub-href').attr('title', 'Subscribe');
+                $('#sub-image-' + user_id).attr('src', '../icons/subscribed.png');
+                $('#sub-image-' + user_id).attr('alt', 'Subscribe');
+                $('#sub-href-' + user_id).attr('href', 'javascript:subscribe(' + current_user_id + ', ' + user_id + ',1)');
+                $('#sub-href-' + user_id).attr('title', 'Subscribe');
             }
         }
     </script>
