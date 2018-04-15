@@ -26,7 +26,7 @@ defined('MOODLE_INTERNAL') || die();
 
 
 require_once(dirname(__FILE__).'/vpl_code.class.php');
-
+require_once(dirname(__FILE__).'/vpl_subscriber_code.class.php');
 
 
 
@@ -34,10 +34,10 @@ class mod_vpl_manage_view {
 
     public static function load_information_codes($vpl_id)
     {
-
+        $Observer   =   new mod_vpl_subscriber_code(1);
+        $subscriber =   $Observer->get_all_subscribes();
         global $DB;
-        //$parms = array('vpl' => $vpl_id);
-        //$vpl_submissions = $DB->get_records('vpl_submissions', $parms);
+
         $user_ids = $DB->get_records_sql('SELECT distinct userid FROM {vpl_submissions} WHERE vpl = ? ', array( $vpl_id ));
         $user_ids = json_decode(json_encode($user_ids), True);
 
@@ -82,9 +82,17 @@ class mod_vpl_manage_view {
                 $code->vpl_submissions_id = $item_of_information_code['vpl_submissions_id'];
                 foreach ($user as $item_of_user)
                 {
-                    $code->name = $item_of_user['firstname'] .' '. $item_of_user['lastname'];
+                    $code->name     =   $item_of_user['firstname'] .' '. $item_of_user['lastname'];
+                    $code->userId   =   $item_of_user['id'];
                 }
-
+                if(in_array($code->userId, $subscriber))
+                {
+                    $code->subscribe=1;
+                }
+                else
+                {
+                    $code->subscribe=0;
+                }
                 $codes[]     =   $code;
             }
 

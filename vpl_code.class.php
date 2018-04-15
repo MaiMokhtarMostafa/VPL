@@ -34,6 +34,8 @@ class mod_vpl_code {
     public $vpl_submissions_id;
     public $time;
     public $name;
+    public $userId;
+    public $subscribe;
 
     public function add_code_db($title, $discrption, $status, $vpl_submissions_id) {
 
