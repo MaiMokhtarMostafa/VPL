@@ -24,43 +24,26 @@
  * @author Juan Carlos Rodríguez-del-Pino <jcrodriguez@dis.ulpgc.es>
  */
 defined('MOODLE_INTERNAL') || die();
-require_once(dirname(__FILE__).'/vpl_subscriber_code.class.php');
+require_once(dirname(__FILE__).'/vpl_reply.class.php');
 
-class mod_vpl_code {
+class mod_vpl_comment {
 
     public $id;
-    public $title;
-    public $discrption;
-    public $status;
-    public $vpl_submissions_id;
-    public $time;
-    public $name;
-    public $userId;
-    public $subscribe;
-    public $comments;
-    public function add_code_db($title, $discrption, $status, $vpl_submissions_id,$userid) {
+    public $content;
+    public $replyes;
 
-        global $DB;
+    public function load_replyes() {
 
-        $record = new stdClass();
-        $record->title = $title;
-        $record->discrption = $discrption;
-        $date = date ('Y-m-d H:i:s', time());
-        $record->time=$date;
-        $record->status=$status;
-        $record->vpl_submissions_id = $vpl_submissions_id;
-        $code_id =  $DB->insert_record('vpl_code', $record, TRUE);
-        if($status){
-            $subscriber=new mod_vpl_subscriber_code($userid);
-        }
-        $subscriber->setDesc('new code');
-        if (!$code_id) {
-            return FALSE;
-        } else {
-            return TRUE;
-        }
+
     }
-    public function load_comments() {
+
+    public function delete_comment() {
+
+
+    }
+
+
+    public function edit_comment() {
 
 
     }
