@@ -136,6 +136,7 @@ echo '
             echo '<td>' . $code->time .'</td>';
             echo '<td id="action" style="text-align: center;">
                 <a href="javascript:LoadCode(\'' . $desc . '\', ' . $code->vpl_submissions_id . ')" title="View"><img src="../icons/view.png" alt="view"></a>';
+
              if($code->subscribe){
                  echo  '<a id="sub-href-' . $code->userId . '" href="javascript:subscribe(' . $userid . ', ' . $code->userId . ', 0)" title="UnSubscribe"><img id="sub-image-' . $code->userId . '" src="../icons/unsubscribed.png" alt="UnSubscribe"></a>';
              } else {

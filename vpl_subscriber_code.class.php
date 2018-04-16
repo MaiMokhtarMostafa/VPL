@@ -14,7 +14,7 @@ class mod_vpl_subscriber_code implements mod_vpl_subject
     public function unSubscribeObserver($observer)
     {
         global $DB;
-        $conditions=array('subscribee' =>$this->id  , 'subscriber' => $observer->id);
+        $conditions=array('subscribee' =>$observer->id , 'subscriber' => $this->id );
         $DB->delete_records('vpl_subscribe', $conditions);
     }
 
@@ -22,8 +22,8 @@ class mod_vpl_subscriber_code implements mod_vpl_subject
     {
         global $DB;
         $record = new stdClass();
-        $record->subscribee = $this->id;
-        $record->subscriber=$observer->id;
+        $record->subscribee = $observer->id;
+        $record->subscriber=$this->id;
         $DB->insert_record('vpl_subscribe', $record, TRUE);
     }
 
@@ -35,7 +35,8 @@ class mod_vpl_subscriber_code implements mod_vpl_subject
 
     public function notifyOpservers()
     {
-        $subscribers=$this->get_all_subscribes();
+        $subscribers=$this->get_all_subscribees();
+
         $self_user=$this->getUserObj($this->id);
         foreach($subscribers as $subscriber)
         {
@@ -62,6 +63,20 @@ class mod_vpl_subscriber_code implements mod_vpl_subject
     public function get_all_subscribes()
     {
         global $DB;
+        $parms = array('subscribee' => $this->id);
+        $users=$DB->get_records('vpl_subscribe', $parms);
+        $users = json_decode(json_encode($users), True);
+        $subscriber=array();
+        foreach ($users as $user)
+        {
+            $subscriber[]= $user['subscriber'];
+        }
+        return $subscriber;
+    }
+
+    public function get_all_subscribees()
+    {
+        global $DB;
         $parms = array('subscriber' => $this->id);
         $users=$DB->get_records('vpl_subscribe', $parms);
         $users = json_decode(json_encode($users), True);
@@ -72,7 +87,6 @@ class mod_vpl_subscriber_code implements mod_vpl_subject
         }
         return $subscriber;
     }
-    
     
     
     private function getUserObj($userid){

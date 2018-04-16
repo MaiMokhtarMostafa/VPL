@@ -36,6 +36,7 @@ class mod_vpl_manage_view {
     {
         $Observer   =   new mod_vpl_subscriber_code($userid);
         $subscriber =   $Observer->get_all_subscribes();
+
         global $DB;
 
         $user_ids = $DB->get_records_sql('SELECT distinct userid FROM {vpl_submissions} WHERE vpl = ? ', array( $vpl_id ));
