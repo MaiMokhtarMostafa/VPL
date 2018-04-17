@@ -28,6 +28,7 @@ require_once(dirname(__FILE__).'/../locallib.php');
 require_once(dirname(__FILE__).'/grade_form.php');
 require_once(dirname(__FILE__).'/../vpl.class.php');
 require_once(dirname(__FILE__).'/../vpl_submission.class.php');
+require_once(dirname(__FILE__).'/../vpl_code.class.php');
 require_once(dirname(__FILE__).'/../views/sh_factory.class.php');
 require_once(dirname(__FILE__).'/../vpl_manage_view.class.php');
 include_once(dirname(__FILE__).'/../vpl_subscriber_code.class.php');
@@ -61,6 +62,24 @@ if(isset($_POST['vpl_submissions_id'])){
     $subinstance=mod_vpl_manage_view::print_submission_by_ID($vpl_submissions_id);
     $submission = new mod_vpl_submission( $vpl,$subinstance );
     $code = $submission->get_submitted_fgm()->print_files();
+    die();
+}
+
+if(isset($_POST['comm'])){
+    $vpl_submissions_id = $_POST['comm'];
+    $code = new mod_vpl_code();
+    $comments = $code->load_comments($vpl_submissions_id);
+    $users = $comments['users'];
+    $comms = $comments['comments'];
+    foreach($users as $user){
+        $user->profileimage = $OUTPUT->user_picture($user, array('size'=>50));
+    }
+    foreach($comms as $comm){
+        foreach($comm->replies['replyusers'] as $user){
+            $user->profileimage = $OUTPUT->user_picture($user, array('size'=>50));
+        }
+    }
+    echo json_encode($comments);
     die();
 }
 
@@ -102,17 +121,24 @@ echo '
                     <p id="Description"></p>
                     <h2>Code:</h2>
                     <div id="code"></div>
-                </div> 
+                    
+                    <h3 class="my-3">Comments</h3>
+                    <ul class="list-group" id="commList">
+                    </ul>
+                    
+               </div>
+               <form method="POST" id="upload_comment" action="" enctype="multipart/form-data">
+                  <textarea class="form-control dir-auto" id="comment" style="width: 60%;margin-left: 10%;margin-bottom: 3%;" name="comment" rows="3" placeholder="Write a comment.." required=""></textarea>
+                  <input class="btn btn-default" id="addComm" type="submit" name="send" value="Write Comment" style="margin-left: 50%;margin-bottom: 2%;">
+               </form>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
-
-<div id="test"></div>
 
 <div class="table-responsive">
     <table id="codes" class="table table-hover table-bordered" width="100%" cellspacing="0">
@@ -125,7 +151,7 @@ echo '
             </tr>
         </thead>
         <tbody>';
-        // loading all public codes
+         // loading all public codes
          $codes = mod_vpl_manage_view::load_information_codes($current_instance->id, $userid);
          foreach($codes as $code)
          {
@@ -155,12 +181,56 @@ echo '
 echo "
     <script>
         function LoadCode(desc, vpl_submissions_id){
+            // Load Code
             $.ajax({
                 type: 'POST',
                 dataType: 'html',
                 url: '',
                 data:{vpl_submissions_id:vpl_submissions_id},
                 success: function(data){
+                    // Load Comments
+                    $.ajax({
+                        type: 'POST',
+                        url: '',
+                        data:{comm:vpl_submissions_id},
+                        success: function(data){
+                            data = JSON.parse(data);
+                            console.log(data);
+                            var comments = data.comments;
+                            var users = data.users;
+                            var i = 0;
+                            var html_comm = '';
+                            comments.forEach(function(comment){
+                                html_comm += `
+                                    <li class='list-group-item' id='wholecomment-` + comment.id + `' style='border-radius: 3pc; margin-bottom:5px;'>
+                                        ` + users[i].profileimage + `
+                                        <b style='margin:5px 0 10px 5px; position:absolute; color:black;'>` + users[i].firstname + ` ` + users[i].lastname + `</b></a><br>
+                                        <div id='comment-` + comment.id + `' style='margin: -28px 0px 20px 75px; width: 88%; overflow-wrap: break-word; color: black; white-space: pre;'>` + comment.comment + `</div>
+                                        <ul class='list-group' style='margin: 10px;' id='repList'>
+                                `;
+                                var commentsreplies = comment.replies['replies'];
+                                var commentsreplyusers = comment.replies['replyusers'];
+                                var j = 0;
+                                if(commentsreplies.length > 0){
+                                    commentsreplies.forEach(function(reply){
+                                        html_comm += `
+                                            <li class='list-group-item' id='rep-` + reply.id + `' style='border-radius: 3pc; margin-bottom:5px;'>
+                                                ` + commentsreplyusers[j].profileimage + `
+                                                <b style='margin:5px 0 10px 5px; position:absolute; color:black;'>` + commentsreplyusers[j].firstname + ` ` + commentsreplyusers[j].lastname + `</b></a>
+                                                <div id='reptext144' style='margin: -28px 0px 20px 75px; width: 88%; overflow-wrap: break-word; color: black; white-space: pre;'>` + reply.reply + `</div>
+                                            </li>
+                                        `;
+                                        j += 1;
+                                    });
+                                    html_comm += `
+                                        </ul>
+                                    </li>`;
+                                }
+                                i += 1;
+                            });
+                            $('#commList').html(html_comm);
+                        }
+                    });
                     $('#Description').html(desc);
                     $('#code').html(data);
                     $('#myModal').modal('show'); 

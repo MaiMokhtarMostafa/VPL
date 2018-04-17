@@ -23,8 +23,14 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @author Juan Carlos Rodríguez-del-Pino <jcrodriguez@dis.ulpgc.es>
  */
-defined('MOODLE_INTERNAL') || die();
+
+require_once(__DIR__ . '/../../config.php');
+require_once(dirname(__FILE__).'/locallib.php');
 require_once(dirname(__FILE__).'/vpl_subscriber_code.class.php');
+
+defined('MOODLE_INTERNAL') || die();
+
+
 
 class mod_vpl_code {
 
@@ -38,10 +44,9 @@ class mod_vpl_code {
     public $userId;
     public $subscribe;
     public $comments;
+    
     public function add_code_db($title, $discrption, $status, $vpl_submissions_id,$userid) {
-
         global $DB;
-
         $record = new stdClass();
         $record->title = $title;
         $record->discrption = $discrption;
@@ -60,11 +65,51 @@ class mod_vpl_code {
             return TRUE;
         }
     }
-    public function load_comments() {
-
-
+    public function load_comments($vpl_submissions_id) {
+        global $DB, $USER;
+        $parms = array('vpl_submissions_id' => $vpl_submissions_id);
+        $comments = $DB->get_records('vpl_code_comment', $parms);
+        $users = array();
+        $allcomments = array();
+        // gettign user for each comment and replies
+        foreach($comments as $comment){
+            $user = new stdClass();
+            $parms = array('id' => $comment->userid);
+            $record = $DB->get_record('user', $parms);
+            $user->id = $record->id;
+            $user->firstname = $record->firstname;
+            $user->lastname = $record->lastname;
+            
+            $parms = array('commentid' => $comment->id);
+            $replies = $DB->get_records('vpl_code_comment_replies', $parms);
+            
+            $allreplies = array();
+            $replyusers = array();
+            
+            foreach($replies as $reply){
+                $replyuser = new stdClass();
+                $parms = array('id' => $reply->userid);
+                $replyuserrecord = $DB->get_record('user', $parms);
+                $replyuser->id = $replyuserrecord->id;
+                $replyuser->firstname = $replyuserrecord->firstname;
+                $replyuser->lastname = $replyuserrecord->lastname;
+                array_push($replyusers, $replyuser);
+                array_push($allreplies, $reply);
+            }
+            
+            $newdata['replies'] = $allreplies;
+            
+            $newdata['replyusers'] = $replyusers;
+            
+            $comment->replies = $newdata;
+            
+            array_push($users, $user);
+            array_push($allcomments, $comment);
+        }
+        $data['users'] = $users;
+        $data['comments'] = $allcomments;
+        return $data;
     }
-
 }
 
 ?>

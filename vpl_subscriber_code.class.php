@@ -54,7 +54,6 @@ class mod_vpl_subscriber_code implements mod_vpl_subject
             $message->contexturl = 'http://GalaxyFarFarAway.com';
             $message->contexturlname = 'Context name';
             $message->replyto = "info@example.com";
-            //$message->courseid = $id;
             message_send($message);
         }
         
