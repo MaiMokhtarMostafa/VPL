@@ -31,10 +31,32 @@ class mod_vpl_comment {
     public $id;
     public $content;
     public $replyes;
+    public $user;
+
+    public function __construct()
+    {
+        $this->user=new stdClass();
+        $this->replyes=array();
+    }
 
     public function load_replyes() {
-
-
+        global $DB;
+        $parms = array('vpl_code_comment_id' => $this->id);
+        $replyes = $DB->get_records('vpl_code_reply', $parms);
+        $replyes = json_decode(json_encode($replyes), True);
+        foreach ($replyes as $reply)
+        {
+            $replyClass          =   new mod_vpl_reply();
+            $replyClass->id      =   $reply['id'];
+            $replyClass->content =   $reply['content'];
+            $parms = array('id' => $reply['userid']);
+            $user = $DB->get_record('user', $parms);
+            $user = json_decode(json_encode($user), True);
+            $replyClass->user->id=$user['id'];
+            $replyClass->user->firstname=$user['firstname'];
+            $replyClass->user->lastname=$user['lastname'];
+            $this->replyes[]=$replyClass;
+        }
     }
 
     public function delete_comment() {

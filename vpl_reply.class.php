@@ -30,9 +30,15 @@ class mod_vpl_reply {
 
     public $id;
     public $content;
+    public $user;
+
+    public function __construct()
+    {
+        $this->user=new stdClass();
+    }
 
     public function delete_reply() {
-
+        
 
     }
 
