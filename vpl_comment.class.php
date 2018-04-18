@@ -32,6 +32,7 @@ class mod_vpl_comment {
     public $content;
     public $replyes;
     public $user;
+    public $vpl_submissions_id;
 
     public function __construct() {
         $this->user = new stdClass();
@@ -68,7 +69,21 @@ class mod_vpl_comment {
         $record->content = $this->content;
         $record->id = $this->id;
         $DB->insert_records('vpl_code_comment', $record);
-        
+    }
+
+    public function add_comment() {
+        global $DB;
+        $record = new stdClass();
+        $record->contant = $this->content;
+        $record->userid = $this->user;
+        $record->vpl_submissions_id = $this->vpl_submissions_id;
+
+        $comment_id = $DB->insert_record('vpl_code_comment', $record, TRUE);
+        if (!$comment_id) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
     }
 
 }
