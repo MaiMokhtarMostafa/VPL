@@ -24,7 +24,7 @@
  * @author Juan Carlos Rodríguez-del-Pino <jcrodriguez@dis.ulpgc.es>
  */
 defined('MOODLE_INTERNAL') || die();
-require_once(dirname(__FILE__).'/vpl_reply.class.php');
+require_once(dirname(__FILE__) . '/vpl_reply.class.php');
 
 class mod_vpl_reply {
 
@@ -32,20 +32,17 @@ class mod_vpl_reply {
     public $content;
     public $user;
 
-    public function __construct()
-    {
-        $this->user=new stdClass();
+    public function __construct() {
+        $this->user = new stdClass();
     }
 
     public function delete_reply() {
-        
-
+        global $DB;
+        $DB->delete_records('vpl_code_reply', array('id' => $this->id));
     }
 
-
     public function edit_reply() {
-
-
+        
     }
 
 }
