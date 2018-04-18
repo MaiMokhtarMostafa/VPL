@@ -31,6 +31,7 @@ class mod_vpl_reply {
     public $id;
     public $content;
     public $user;
+    public $comment_id;
 
     public function __construct() {
         $this->user = new stdClass();
@@ -42,14 +43,27 @@ class mod_vpl_reply {
     }
 
     public function edit_reply() {
-        
+
         global $DB;
         $record = new stdClass();
         $record->content = $this->content;
         $record->id = $this->id;
         $DB->insert_records('vpl_code_reply', $record);
-       
-        
+    }
+
+    public function add_reply() {
+        global $DB;
+        $record = new stdClass();
+        $record->contant = $this->content;
+        $record->userid = $this->user;
+        $record->vpl_code_comment_id = $this->comment_id;
+
+        $reply_id = $DB->insert_record('vpl_code_reply', $record, TRUE);
+        if (!$reply_id) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
     }
 
 }
