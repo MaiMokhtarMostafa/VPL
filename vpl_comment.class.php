@@ -66,10 +66,11 @@ class mod_vpl_comment {
         global $DB;
         $record = new stdClass();
         $record->content = $Editedcontent;
+        $record->id = $commentID;
         $parms = array('commentid' => $commentID);
-        $user = $DB->get_record('user', $parms,'user');
+        $user = $DB->get_record('vpl_code_comment', $parms,'userid');
         if($user == $userId){
-            $DB->update_record('vpl_code_comment', $record);
+            $DB->insert_records('vpl_code_comment', $record);
         }
     }
 
