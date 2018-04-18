@@ -24,7 +24,7 @@
  * @author Juan Carlos Rodríguez-del-Pino <jcrodriguez@dis.ulpgc.es>
  */
 defined('MOODLE_INTERNAL') || die();
-require_once(dirname(__FILE__).'/vpl_reply.class.php');
+require_once(dirname(__FILE__) . '/vpl_reply.class.php');
 
 class mod_vpl_comment {
 
@@ -33,10 +33,9 @@ class mod_vpl_comment {
     public $replyes;
     public $user;
 
-    public function __construct()
-    {
-        $this->user=new stdClass();
-        $this->replyes=array();
+    public function __construct() {
+        $this->user = new stdClass();
+        $this->replyes = array();
     }
 
     public function load_replyes() {
@@ -44,31 +43,27 @@ class mod_vpl_comment {
         $parms = array('vpl_code_comment_id' => $this->id);
         $replyes = $DB->get_records('vpl_code_reply', $parms);
         $replyes = json_decode(json_encode($replyes), True);
-        foreach ($replyes as $reply)
-        {
-            $replyClass          =   new mod_vpl_reply();
-            $replyClass->id      =   $reply['id'];
-            $replyClass->content =   $reply['content'];
+        foreach ($replyes as $reply) {
+            $replyClass = new mod_vpl_reply();
+            $replyClass->id = $reply['id'];
+            $replyClass->content = $reply['content'];
             $parms = array('id' => $reply['userid']);
             $user = $DB->get_record('user', $parms);
             $user = json_decode(json_encode($user), True);
-            $replyClass->user->id=$user['id'];
-            $replyClass->user->firstname=$user['firstname'];
-            $replyClass->user->lastname=$user['lastname'];
-            $this->replyes[]=$replyClass;
+            $replyClass->user->id = $user['id'];
+            $replyClass->user->firstname = $user['firstname'];
+            $replyClass->user->lastname = $user['lastname'];
+            $this->replyes[] = $replyClass;
         }
     }
 
     public function delete_comment() {
         global $DB;
         $DB->delete_records('vpl_code_comment', array('id' => $this->id));
-
     }
 
-
     public function edit_comment() {
-
-
+        
     }
 
 }
