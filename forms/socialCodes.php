@@ -104,6 +104,7 @@ $vpl->print_view_tabs( basename( __FILE__ ) );
 
 // Display submission.
 
+
 echo '
 <div class="container">
     <!-- Modal -->
@@ -129,7 +130,8 @@ echo '
                </div>
                <form method="POST" id="upload_comment" action="" enctype="multipart/form-data">
                   <textarea class="form-control dir-auto" id="comment" style="width: 60%;margin-left: 10%;margin-bottom: 3%;" name="comment" rows="3" placeholder="Write a comment.." required=""></textarea>
-                  <input class="btn btn-default" id="addComm" type="submit" name="send" value="Write Comment" style="margin-left: 50%;margin-bottom: 2%;">
+                  <input class="btn btn-default" id="addComm" type="submit" name="send" value="Write Comment" style="margin-left: 15%;margin-bottom: 2%;">
+                  <a class="btn btn-default" href="../views/downloadsubmission.php" id="dwn-button" style="margin-left: 9%;margin-bottom: 2%;">Download Code</a>
                </form>
 
                 <div class="modal-footer">
@@ -152,7 +154,8 @@ echo '
         </thead>
         <tbody>';
          // loading all public codes
-         $codes = mod_vpl_manage_view::load_information_codes($current_instance->id, $userid);
+            $codes = mod_vpl_manage_view::load_information_codes($current_instance->id, $userid);
+
          foreach($codes as $code)
          {
             $desc = mod_vpl_manage_view::print_submission_Description($code->vpl_submissions_id);
@@ -161,7 +164,7 @@ echo '
             echo '<td>' .$code->title .'</td>';
             echo '<td>' . $code->time .'</td>';
             echo '<td id="action" style="text-align: center;">
-                <a href="javascript:LoadCode(\'' . $desc . '\', ' . $code->vpl_submissions_id . ')" title="View"><img src="../icons/view.png" alt="view"></a>';
+                <a href="javascript:LoadCode(\'' . $desc . '\', ' . $code->vpl_submissions_id . ', ' . $id . ',' . $userid . ')" title="View"><img src="../icons/view.png" alt="view"></a>';
 
              if($code->subscribe){
                  echo  '<a id="sub-href-' . $code->userId . '" href="javascript:subscribe(' . $userid . ', ' . $code->userId . ', 0)" title="UnSubscribe"><img id="sub-image-' . $code->userId . '" src="../icons/unsubscribed.png" alt="UnSubscribe"></a>';
@@ -180,7 +183,7 @@ echo '
 
 echo "
     <script>
-        function LoadCode(desc, vpl_submissions_id){
+        function LoadCode(desc, vpl_submissions_id, crid, userid){
             // Load Code
             $.ajax({
                 type: 'POST',
@@ -188,6 +191,7 @@ echo "
                 url: '',
                 data:{vpl_submissions_id:vpl_submissions_id},
                 success: function(data){
+                    $('#dwn-button').attr('href', $('#dwn-button').attr('href') + '?id=' + crid + '&userid=' + userid + '&submissionid=' + vpl_submissions_id);
                     // Load Comments
                     $.ajax({
                         type: 'POST',
