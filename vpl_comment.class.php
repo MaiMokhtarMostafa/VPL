@@ -62,16 +62,13 @@ class mod_vpl_comment {
         $DB->delete_records('vpl_code_comment', array('id' => $this->id));
     }
 
-    public function edit_comment($commentID,$Editedcontent,$userId) {
+    public function edit_comment() {
         global $DB;
         $record = new stdClass();
-        $record->content = $Editedcontent;
-        $record->id = $commentID;
-        $parms = array('commentid' => $commentID);
-        $user = $DB->get_record('vpl_code_comment', $parms,'userid');
-        if($user == $userId){
-            $DB->insert_records('vpl_code_comment', $record);
-        }
+        $record->content = $this->content;
+        $record->id = $this->id;
+        $DB->insert_records('vpl_code_comment', $record);
+        
     }
 
 }
