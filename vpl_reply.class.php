@@ -41,7 +41,11 @@ class mod_vpl_reply {
         $DB->delete_records('vpl_code_reply', array('id' => $this->id));
     }
 
-    public function edit_reply() {
+    public function edit_reply($Editedcontent) {
+        global $DB;
+        $record = new stdClass();
+        $record->content = $Editedcontent;
+        $DB->update_record('vpl_code_reply', $record);
         
     }
 
