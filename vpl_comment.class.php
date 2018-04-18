@@ -60,7 +60,8 @@ class mod_vpl_comment {
     }
 
     public function delete_comment() {
-
+        global $DB;
+        $DB->delete_records('vpl_code_comment', array('id' => $this->id));
 
     }
 
