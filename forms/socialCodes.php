@@ -33,6 +33,8 @@ require_once(dirname(__FILE__).'/../views/sh_factory.class.php');
 require_once(dirname(__FILE__).'/../vpl_manage_view.class.php');
 include_once(dirname(__FILE__).'/../vpl_subscriber_code.class.php');
 include_once(dirname(__FILE__).'/../vpl_subscribee_code.class.php');
+include_once(dirname(__FILE__).'/../views/socialView.php');
+
 
 global $CFG, $USER;
 
@@ -68,20 +70,50 @@ if(isset($_POST['vpl_submissions_id'])){
 if(isset($_POST['comm'])){
     $vpl_submissions_id = $_POST['comm'];
     $code = new mod_vpl_code();
-    $comments = $code->load_comments($vpl_submissions_id);
-    $users = $comments['users'];
-    $comms = $comments['comments'];
-    foreach($users as $user){
-        $user->profileimage = $OUTPUT->user_picture($user, array('size'=>50));
+    $code->vpl_submissions_id=$vpl_submissions_id;
+    $code->load_comments();
+    foreach($code->comments as $comment){
+        $comment->user->profileimage = $OUTPUT->user_picture($comment->user, array('size'=>50));
     }
-    foreach($comms as $comm){
-        foreach($comm->replies['replyusers'] as $user){
-            $user->profileimage = $OUTPUT->user_picture($user, array('size'=>50));
-        }
-    }
-    echo json_encode($comments);
+
+
+    echo json_encode($code->comments);
     die();
 }
+
+if(isset($_POST['comment_id_reply'])){
+    $comment_id= $_POST['comment_id_reply'];
+    $comment = new mod_vpl_comment();
+    $comment->id=$comment_id;
+    $comment->load_replies();
+    foreach($comment->replies as $reply){
+        $reply->user->profileimage = $OUTPUT->user_picture($reply->user, array('size'=>50));
+    }
+
+
+    echo json_encode($comment->replies);
+    die();
+}
+
+
+if(isset($_POST['comment_id_delete'])){
+    $comment_id= $_POST['comment_id_delete'];
+    $comment = new mod_vpl_comment();
+    $comment->id=$comment_id;
+    $comment->delete_comment();
+    echo json_encode('success');
+    die();
+}
+
+if(isset($_POST['reply_id_delete'])){
+    $reply_id= $_POST['reply_id_delete'];
+    $reply = new mod_vpl_reply();
+    $reply->id=$reply_id;
+    $reply->delete_reply();
+    echo json_encode('success');
+    die();
+}
+
 
 if(isset($_POST['current_user_id'])){
     $current_user_id = $_POST['current_user_id'];
@@ -105,54 +137,7 @@ $vpl->print_view_tabs( basename( __FILE__ ) );
 // Display submission.
 
 
-echo '
-<div class="container">
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
-
-          <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">View Code</h4>
-                </div>
-                <div class="modal-body">
-                    <h2>Description:</h2>
-                    <p id="Description"></p>
-                    <h2>Code:</h2>
-                    <div id="code"></div>
-                    
-                    <h3 class="my-3">Comments</h3>
-                    <ul class="list-group" id="commList">
-                    </ul>
-                    
-               </div>
-               <form method="POST" id="upload_comment" action="" enctype="multipart/form-data">
-                  <textarea class="form-control dir-auto" id="comment" style="width: 60%;margin-left: 10%;margin-bottom: 3%;" name="comment" rows="3" placeholder="Write a comment.." required=""></textarea>
-                  <input class="btn btn-default" id="addComm" type="submit" name="send" value="Write Comment" style="margin-left: 15%;margin-bottom: 2%;">
-                  <a class="btn btn-default" href="../views/downloadsubmission.php" id="dwn-button" style="margin-left: 9%;margin-bottom: 2%;">Download Code</a>
-               </form>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="table-responsive">
-    <table id="codes" class="table table-hover table-bordered" width="100%" cellspacing="0">
-        <thead>
-            <tr>
-                <th style="text-align: center;">User name</th>
-                <th style="text-align: center;">Title</th>
-                <th style="text-align: center;">Submitted At</th>
-                <th style="text-align: center;">Action</th>
-            </tr>
-        </thead>
-        <tbody>';
+print_header_table();
          // loading all public codes
             $codes = mod_vpl_manage_view::load_information_codes($current_instance->id, $userid);
 
@@ -181,106 +166,8 @@ echo '
 </div>
 ';
 
-echo "
-    <script>
-        function LoadCode(desc, vpl_submissions_id, crid, userid){
-            // Load Code
-            $.ajax({
-                type: 'POST',
-                dataType: 'html',
-                url: '',
-                data:{vpl_submissions_id:vpl_submissions_id},
-                success: function(data){
-                    $('#dwn-button').attr('href', $('#dwn-button').attr('href') + '?id=' + crid + '&userid=' + userid + '&submissionid=' + vpl_submissions_id);
-                    // Load Comments
-                    $.ajax({
-                        type: 'POST',
-                        url: '',
-                        data:{comm:vpl_submissions_id},
-                        success: function(data){
-                            data = JSON.parse(data);
-                            console.log(data);
-                            var comments = data.comments;
-                            var users = data.users;
-                            var i = 0;
-                            var html_comm = '';
-                            comments.forEach(function(comment){
-                                html_comm += `
-                                    <li class='list-group-item' id='wholecomment-` + comment.id + `' style='border-radius: 3pc; margin-bottom:5px;'>
-                                        ` + users[i].profileimage + `
-                                        <b style='margin:5px 0 10px 5px; position:absolute; color:black;'>` + users[i].firstname + ` ` + users[i].lastname + `</b></a><br>
-                                        <div id='comment-` + comment.id + `' style='margin: -28px 0px 20px 75px; width: 88%; overflow-wrap: break-word; color: black; white-space: pre;'>` + comment.comment + `</div>
-                                        <ul class='list-group' style='margin: 10px;' id='repList'>
-                                `;
-                                var commentsreplies = comment.replies['replies'];
-                                var commentsreplyusers = comment.replies['replyusers'];
-                                var j = 0;
-                                if(commentsreplies.length > 0){
-                                    commentsreplies.forEach(function(reply){
-                                        html_comm += `
-                                            <li class='list-group-item' id='rep-` + reply.id + `' style='border-radius: 3pc; margin-bottom:5px;'>
-                                                ` + commentsreplyusers[j].profileimage + `
-                                                <b style='margin:5px 0 10px 5px; position:absolute; color:black;'>` + commentsreplyusers[j].firstname + ` ` + commentsreplyusers[j].lastname + `</b></a>
-                                                <div id='reptext144' style='margin: -28px 0px 20px 75px; width: 88%; overflow-wrap: break-word; color: black; white-space: pre;'>` + reply.reply + `</div>
-                                            </li>
-                                        `;
-                                        j += 1;
-                                    });
-                                    html_comm += `
-                                        </ul>
-                                    </li>`;
-                                }
-                                i += 1;
-                            });
-                            $('#commList').html(html_comm);
-                        }
-                    });
-                    $('#Description').html(desc);
-                    $('#code').html(data);
-                    $('#myModal').modal('show'); 
-                }
-            });
-        }
-        
-        function subscribe(current_user_id, user_id,status){
-            $.ajax({
-                type: 'POST',
-                url: '',
-                data:{current_user_id:current_user_id, user_id:user_id, status:status}
-            });
-            if(status == 1){
-                $('#sub-image-' + user_id).attr('src', '../icons/unsubscribed.png');
-                $('#sub-image-' + user_id).attr('alt', 'UnSubscribe');
-                $('#sub-href-' + user_id).attr('href', 'javascript:subscribe(' + current_user_id + ', ' + user_id + ',0)');
-                $('#sub-href-' + user_id).attr('title', 'UnSubscribe');
-            } else {
-                $('#sub-image-' + user_id).attr('src', '../icons/subscribed.png');
-                $('#sub-image-' + user_id).attr('alt', 'Subscribe');
-                $('#sub-href-' + user_id).attr('href', 'javascript:subscribe(' + current_user_id + ', ' + user_id + ',1)');
-                $('#sub-href-' + user_id).attr('title', 'Subscribe');
-            }
-        }
-    </script>
-";
 
-echo "
-    <script>
-        $(document).ready( function () {
-            $('#codes').DataTable({
-                'columns': [
-                    { 'width': '20%' },
-                    { 'width': '20%' },
-                    { 'width': '20%' },
-                    { 'width': '20%' }
-                ]
-            });
-            $.ajax({
-                type: 'POST',
-                url: '../ajax/test',
-                dataType: 'html',
-            });
-        });
-    </script>
-";
+
+load_data();
 
 $vpl->print_footer();

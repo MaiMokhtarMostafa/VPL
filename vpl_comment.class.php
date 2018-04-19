@@ -30,21 +30,21 @@ class mod_vpl_comment {
 
     public $id;
     public $content;
-    public $replyes;
+    public $replies;
     public $user;
     public $vpl_submissions_id;
 
     public function __construct() {
         $this->user = new stdClass();
-        $this->replyes = array();
+        $this->replies = array();
     }
 
-    public function load_replyes() {
+    public function load_replies() {
         global $DB;
         $parms = array('vpl_code_comment_id' => $this->id);
-        $replyes = $DB->get_records('vpl_code_reply', $parms);
-        $replyes = json_decode(json_encode($replyes), True);
-        foreach ($replyes as $reply) {
+        $replies = $DB->get_records('vpl_code_reply', $parms);
+        $replies = json_decode(json_encode($replies), True);
+        foreach ($replies as $reply) {
             $replyClass = new mod_vpl_reply();
             $replyClass->id = $reply['id'];
             $replyClass->content = $reply['content'];
@@ -54,7 +54,7 @@ class mod_vpl_comment {
             $replyClass->user->id = $user['id'];
             $replyClass->user->firstname = $user['firstname'];
             $replyClass->user->lastname = $user['lastname'];
-            $this->replyes[] = $replyClass;
+            $this->replies[] = $replyClass;
         }
     }
 
