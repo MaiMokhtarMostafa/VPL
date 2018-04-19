@@ -24,11 +24,10 @@ function print_header_table()
                     </ul>
                     
                </div>
-               <form method="POST" id="upload_comment" action="" enctype="multipart/form-data">
                   <textarea class="form-control dir-auto" id="comment" style="width: 60%;margin-left: 10%;margin-bottom: 3%;" name="comment" rows="3" placeholder="Write a comment.." required=""></textarea>
-                  <input class="btn btn-default" id="addComm" type="submit" name="send" value="Write Comment" style="margin-left: 15%;margin-bottom: 2%;">
+                  <input class="btn btn-default" id="addComm" type="button" name="send" value="Write Comment" onclick="addComment()" style="margin-left: 15%;margin-bottom: 2%;">
+                  <input   type="button"  style="display: none;" id="val_submission_id">
                   <a class="btn btn-default" href="../views/downloadsubmission.php" id="dwn-button" style="margin-left: 9%;margin-bottom: 2%;">Download Code</a>
-               </form>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -55,8 +54,64 @@ function load_data()
 {global  $USER;
     echo "
     <script>
+    
+    
+        function addComment() {
+          var content=$('#comment').val();
+          var id=$('#val_submission_id').val();
+          $.ajax({
+                        type: 'POST',
+                        url: '',
+                        dataType: 'json',
+                        data:{content_to_add:content ,val_submission_add_comment:id},
+                        success: function(comment){
+
+                            var html_comm = '';
+                            html_comm += `
+                                    <li class='list-group-item' id='wholecomment-` + comment.id + `' style='border-radius: 3pc; margin-bottom:5px;'>
+                                        ` + comment.user.profileimage + `
+                                        <b style='margin:5px 0 10px 5px; position:absolute; color:black;'>` + comment.user.firstname + ` ` + comment.user.lastname + `</b></a><br>
+                                        <div id='comment-` + comment.id+ `' style='margin: -28px 0px 0px 75px; width: 88%; overflow-wrap: break-word; color: black; white-space: pre;'>` + comment.content + `<br><span style='color:blue; cursor:pointer;' onclick='load_Replies(`+comment.id+`)')>Replies</span><span style='color:red; cursor:pointer; margin-left: 10px;' onclick='deleteComment(`+comment.id+`)')>Delete</span></div>
+                                        <ul class='list-group' style='margin: 10px;' id='repcomment-`+comment.id+`'></ul>
+                                    </li>
+                                `;
+
+                                $('#commList').append(html_comm);
+                                $('#comment').val('');
+                            }
+                            
+                            
+                        }); 
+          
+        }
+        
+        
+        function addReply(comment_id) {
+          var content=$('#Reply_add-'+comment_id).val();
+          console.log(content);
+          var id=comment_id ;
+          
+          $.ajax({
+                        type: 'POST',
+                        url: '',
+                        dataType: 'json',
+                        data:{content_reply_to_add:content ,comment_id_to_add_reply:id},
+                        success: function(reply){
+
+                            load_Replies(comment_id);
+                            }
+                            
+                            
+                        }); 
+          
+          
+        }
+        
+        
+        
         function LoadCode(desc, vpl_submissions_id, crid, userid){
             // Load Code
+            $('#val_submission_id').val(vpl_submissions_id);
             $.ajax({
                 type: 'POST',
                 dataType: 'html',
@@ -125,10 +180,15 @@ function load_data()
                                 `;
                                     }
                                     html_reply +=`</div>
+                                    
                                     </li>
                                 `;
                                 
                             }
+                            html_reply+=`
+                                    <textarea class='form-control dir-auto' id='Reply_add-`+comment_id+`' style='width: 60%;margin-left: 10%;margin-bottom: 3%;' name='comment' rows='3' placeholder='Write a reply..' required=''></textarea>
+                                    <input class='btn btn-default' id='addComm' type='button' name='send' value='Write Reply' onclick='addReply(`+comment_id+`)' style='margin-left: 15%;margin-bottom: 2%;'>
+                                    `;
                             $('#repcomment-'+comment_id).html(html_reply);
                         }
                     });
@@ -163,6 +223,7 @@ function load_data()
                 $('#Reply-'+reply_id).remove();
 
         }
+        
         
         
         function subscribe(current_user_id, user_id,status){

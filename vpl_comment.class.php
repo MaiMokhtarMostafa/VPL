@@ -74,12 +74,16 @@ class mod_vpl_comment {
     public function add_comment() {
         global $DB;
         $record = new stdClass();
-        $record->contant = $this->content;
-        $record->userid = $this->user;
+        $record->content = $this->content;
+        $record->userid = $this->user->id;
         $record->vpl_submissions_id = $this->vpl_submissions_id;
-
-        $comment_id = $DB->insert_record('vpl_code_comment', $record, TRUE);
-        if (!$comment_id) {
+        $this->id = $DB->insert_record('vpl_code_comment', $record, TRUE);
+        $parms = array('id' => $this->user->id);
+        $user = $DB->get_record('user', $parms);
+        $user = json_decode(json_encode($user), True);
+        $this->user->firstname = $user['firstname'];
+        $this->user->lastname = $user['lastname'];
+        if (!$this->id) {
             return FALSE;
         } else {
             return TRUE;

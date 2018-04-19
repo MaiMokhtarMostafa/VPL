@@ -115,6 +115,31 @@ if(isset($_POST['reply_id_delete'])){
 }
 
 
+if(isset($_POST['content_to_add'])){
+    $content= $_POST['content_to_add'];
+    $comment = new mod_vpl_comment();
+    $comment->content=$content;
+    $comment->user->id=$USER->id;
+    $comment->vpl_submissions_id=$_POST['val_submission_add_comment'];
+    $comment->add_comment();
+    $comment->user->profileimage = $OUTPUT->user_picture($comment->user, array('size'=>50));
+    echo json_encode($comment);
+    die();
+}
+
+if(isset($_POST['content_reply_to_add'])){
+    $content= $_POST['content_reply_to_add'];
+    $reply = new mod_vpl_reply();
+    $reply->content=$content;
+    $reply->user->id=$USER->id;
+    $reply->vpl_code_comment_id=$_POST['comment_id_to_add_reply'];
+    $reply->add_reply();
+    $reply->user->profileimage = $OUTPUT->user_picture($reply->user, array('size'=>50));
+    echo json_encode($reply);
+    die();
+}
+
+
 if(isset($_POST['current_user_id'])){
     $current_user_id = $_POST['current_user_id'];
     $user_id = $_POST['user_id'];
@@ -165,8 +190,6 @@ print_header_table();
     </table>
 </div>
 ';
-
-
 
 load_data();
 
