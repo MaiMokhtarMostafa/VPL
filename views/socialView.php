@@ -52,7 +52,7 @@ function print_header_table()
 }
 
 function load_data()
-{
+{global  $USER;
     echo "
     <script>
         function LoadCode(desc, vpl_submissions_id, crid, userid){
@@ -77,10 +77,21 @@ function load_data()
                                     <li class='list-group-item' id='wholecomment-` + comments[i].id + `' style='border-radius: 3pc; margin-bottom:5px;'>
                                         ` + comments[i].user.profileimage + `
                                         <b style='margin:5px 0 10px 5px; position:absolute; color:black;'>` + comments[i].user.firstname + ` ` + comments[i].user.lastname + `</b></a><br>
-                                        <div id='comment-` + comments[i].id+ `' style='margin: -28px 0px 0px 75px; width: 88%; overflow-wrap: break-word; color: black; white-space: pre;'>` + comments[i].content + `<br><span style='color:blue; cursor:pointer;' onclick='load_Replies(`+comments[i].id+`)')>Replies</span><span style='color:red; cursor:pointer; margin-left: 10px;' onclick='deleteComment(`+comments[i].id+`)')>Delete</span></div>
+                                        <div id='comment-` + comments[i].id+ `' style='margin: -28px 0px 0px 75px; width: 88%; overflow-wrap: break-word; color: black; white-space: pre;'>` + comments[i].content + `<br><span style='color:blue; cursor:pointer;' onclick='load_Replies(`+comments[i].id+`)')>Replies</span>
+                                `;
+                                if(comments[i].user.id==".$USER->id.")
+                                    {
+                                        html_comm +=`
+                                  <span style='color:red; cursor:pointer; margin-left: 10px;' onclick='deleteComment(`+comments[i].id+`)')>Delete</span>
+                                `;
+                                    }
+                                    html_comm +=`
+                                  </div>
                                         <ul class='list-group' style='margin: 10px;' id='repcomment-`+comments[i].id+`'></ul>
                                     </li>
                                 `;
+                                    
+                                
                             }
                             $('#commList').html(html_comm);
                         }
@@ -105,10 +116,18 @@ function load_data()
                                         ` + replies[i].user.profileimage + `
                                         <b style='margin:5px 0 10px 5px; position:absolute; color:black;'>` + replies[i].user.firstname + ` ` + replies[i].user.lastname + `</b></a><br>
                                         <div id='comment-` + replies[i].id+ `' style='margin: -28px 0px 0px 75px; width: 88%; overflow-wrap: break-word; color: black; white-space: pre;'>` + replies[i].content + `
-                                        <span style='color:red; cursor:pointer; margin-left: 10px;' onclick='deleteReply(`+replies[i].id+`)')>Delete</span></div>
                                         
+                                `;
+                                if(replies[i].user.id==".$USER->id.")
+                                    {
+                                        html_reply +=`
+                                  <span style='color:red; cursor:pointer; margin-left: 10px;' onclick='deleteReply(`+replies[i].id+`)')>Delete</span>
+                                `;
+                                    }
+                                    html_reply +=`</div>
                                     </li>
                                 `;
+                                
                             }
                             $('#repcomment-'+comment_id).html(html_reply);
                         }

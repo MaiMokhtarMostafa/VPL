@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b339c5cc-9c89-4d37-b70e-bb336a6340b4" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forms/socialCodes.php" beforeDir="false" afterPath="$PROJECT_DIR$/forms/socialCodes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vpl_comment.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/vpl_comment.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/socialView.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/socialView.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,8 +19,8 @@
       <file leaf-file-name="socialCodes.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/forms/socialCodes.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="473">
-              <caret line="111" column="26" selection-start-line="111" selection-start-column="26" selection-end-line="111" selection-end-column="26" />
+            <state relative-caret-position="272">
+              <caret line="38" selection-start-line="38" selection-end-line="38" selection-end-column="19" />
               <folding>
                 <element signature="n#style#0;n#td#0;n#!!top" expanded="true" />
               </folding>
@@ -33,7 +31,7 @@
       <file leaf-file-name="vpl_comment.class.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vpl_comment.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-44">
+            <state relative-caret-position="561">
               <caret line="46" selection-start-line="46" selection-end-line="46" />
             </state>
           </provider>
@@ -42,8 +40,13 @@
       <file leaf-file-name="socialView.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/socialView.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="79" column="376" selection-start-line="79" selection-start-column="376" selection-end-line="79" selection-end-column="376" />
+            <state relative-caret-position="456">
+              <caret line="126" column="56" selection-start-line="126" selection-start-column="56" selection-end-line="126" selection-end-column="56" />
+              <folding>
+                <element signature="e#876#922#0" expanded="true" />
+                <element signature="e#1044#1106#0" expanded="true" />
+                <element signature="e#1265#1371#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -185,12 +188,12 @@
       <workItem from="1523866236974" duration="2535000" />
       <workItem from="1523905629368" duration="28000" />
       <workItem from="1523936012855" duration="3493000" />
-      <workItem from="1524100755569" duration="3672000" />
+      <workItem from="1524100755569" duration="4404000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="52401000" />
+    <option name="totallyTimeSpent" value="53133000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -540,15 +543,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vpl_comment.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-44">
+        <state relative-caret-position="561">
           <caret line="46" selection-start-line="46" selection-end-line="46" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/forms/socialCodes.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="473">
-          <caret line="111" column="26" selection-start-line="111" selection-start-column="26" selection-end-line="111" selection-end-column="26" />
+        <state relative-caret-position="272">
+          <caret line="38" selection-start-line="38" selection-end-line="38" selection-end-column="19" />
           <folding>
             <element signature="n#style#0;n#td#0;n#!!top" expanded="true" />
           </folding>
@@ -557,8 +560,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/socialView.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="79" column="376" selection-start-line="79" selection-start-column="376" selection-end-line="79" selection-end-column="376" />
+        <state relative-caret-position="456">
+          <caret line="126" column="56" selection-start-line="126" selection-start-column="56" selection-end-line="126" selection-end-column="56" />
+          <folding>
+            <element signature="e#876#922#0" expanded="true" />
+            <element signature="e#1044#1106#0" expanded="true" />
+            <element signature="e#1265#1371#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
