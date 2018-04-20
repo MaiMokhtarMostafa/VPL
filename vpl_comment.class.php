@@ -68,7 +68,7 @@ class mod_vpl_comment {
         $record = new stdClass();
         $record->content = $this->content;
         $record->id = $this->id;
-        $DB->insert_records('vpl_code_comment', $record);
+        $DB->update_record('vpl_code_comment', $record);
     }
 
     public function add_comment() {

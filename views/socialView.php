@@ -51,7 +51,8 @@ function print_header_table()
 }
 
 function load_data()
-{global  $USER;
+{
+    global  $USER;
     echo "
     <script>
     
@@ -65,13 +66,22 @@ function load_data()
                         dataType: 'json',
                         data:{content_to_add:content ,val_submission_add_comment:id},
                         success: function(comment){
-
                             var html_comm = '';
                             html_comm += `
                                     <li class='list-group-item' id='wholecomment-` + comment.id + `' style='border-radius: 3pc; margin-bottom:5px;'>
                                         ` + comment.user.profileimage + `
                                         <b style='margin:5px 0 10px 5px; position:absolute; color:black;'>` + comment.user.firstname + ` ` + comment.user.lastname + `</b></a><br>
-                                        <div id='comment-` + comment.id+ `' style='margin: -28px 0px 0px 75px; width: 88%; overflow-wrap: break-word; color: black; white-space: pre;'>` + comment.content + `<br><span style='color:blue; cursor:pointer;' onclick='load_Replies(`+comment.id+`)')>Replies</span><span style='color:red; cursor:pointer; margin-left: 10px;' onclick='deleteComment(`+comment.id+`)')>Delete</span></div>
+                                        <div id='comment-` + comment.id+ `' style='margin: -28px 0px 0px 75px; width: 88%; overflow-wrap: break-word; color: black;'><pre id='contentComment-`+comment.id+`'>` + comment.content + `</pre><br><span style='color:blue; cursor:pointer;' onclick='load_Replies(`+comment.id+`)')>Replies</span>
+                                `;
+                                if(comment.user.id==".$USER->id.")
+                                    {
+                                        html_comm +=`
+                                  <span style='color:red; cursor:pointer; margin-left: 10px;' onclick='deleteComment(`+comment.id+`)')>Delete</span>
+                                  <span style='color:green; cursor:pointer; margin-left: 10px;' id='editComment-`+comment.id+`' onclick='editComment(`+comment.id+`)')>Edit</span>
+                                `;
+                                    }
+                                    html_comm +=`
+                                  </div>
                                         <ul class='list-group' style='margin: 10px;' id='repcomment-`+comment.id+`'></ul>
                                     </li>
                                 `;
@@ -79,8 +89,6 @@ function load_data()
                                 $('#commList').append(html_comm);
                                 $('#comment').val('');
                             }
-                            
-                            
                         }); 
           
         }
@@ -97,11 +105,8 @@ function load_data()
                         dataType: 'json',
                         data:{content_reply_to_add:content ,comment_id_to_add_reply:id},
                         success: function(reply){
-
                             load_Replies(comment_id);
-                            }
-                            
-                            
+                            }                            
                         }); 
           
           
@@ -132,12 +137,13 @@ function load_data()
                                     <li class='list-group-item' id='wholecomment-` + comments[i].id + `' style='border-radius: 3pc; margin-bottom:5px;'>
                                         ` + comments[i].user.profileimage + `
                                         <b style='margin:5px 0 10px 5px; position:absolute; color:black;'>` + comments[i].user.firstname + ` ` + comments[i].user.lastname + `</b></a><br>
-                                        <div id='comment-` + comments[i].id+ `' style='margin: -28px 0px 0px 75px; width: 88%; overflow-wrap: break-word; color: black; white-space: pre;'>` + comments[i].content + `<br><span style='color:blue; cursor:pointer;' onclick='load_Replies(`+comments[i].id+`)')>Replies</span>
+                                        <div id='comment-` + comments[i].id+ `' style='margin: -28px 0px 0px 75px; width: 88%; overflow-wrap: break-word; color: black;'><pre id='contentComment-`+comments[i].id+`'>` + comments[i].content + `</pre><br><span style='color:blue; cursor:pointer;' onclick='load_Replies(`+comments[i].id+`)')>Replies</span>
                                 `;
                                 if(comments[i].user.id==".$USER->id.")
                                     {
                                         html_comm +=`
                                   <span style='color:red; cursor:pointer; margin-left: 10px;' onclick='deleteComment(`+comments[i].id+`)')>Delete</span>
+                                  <span style='color:green; cursor:pointer; margin-left: 10px;' id='editComment-`+comments[i].id+`' onclick='editComment(`+comments[i].id+`)')>Edit</span>
                                 `;
                                     }
                                     html_comm +=`
@@ -170,13 +176,14 @@ function load_data()
                                     <li class='list-group-item' id='Reply-` + replies[i].id + `' style='border-radius: 3pc; margin-bottom:5px;'>
                                         ` + replies[i].user.profileimage + `
                                         <b style='margin:5px 0 10px 5px; position:absolute; color:black;'>` + replies[i].user.firstname + ` ` + replies[i].user.lastname + `</b></a><br>
-                                        <div id='comment-` + replies[i].id+ `' style='margin: -28px 0px 0px 75px; width: 88%; overflow-wrap: break-word; color: black; white-space: pre;'>` + replies[i].content + `
+                                        <div id='comment-` + replies[i].id+ `' style='margin: -28px 0px 0px 75px; width: 88%; overflow-wrap: break-word; color: black; '><pre id='contentReply-`+replies[i].id+`'>` + replies[i].content + `</pre>
                                         
                                 `;
                                 if(replies[i].user.id==".$USER->id.")
                                     {
                                         html_reply +=`
-                                  <span style='color:red; cursor:pointer; margin-left: 10px;' onclick='deleteReply(`+replies[i].id+`)')>Delete</span>
+                                  <br> <span style='color:red; cursor:pointer;' onclick='deleteReply(`+replies[i].id+`)')>Delete</span>
+                                  <span style='color:green; cursor:pointer; margin-left: 10px;' id='editReply-`+replies[i].id+`' onclick='editReply(`+replies[i].id+`)')>Edit</span>
                                 `;
                                     }
                                     html_reply +=`</div>
@@ -195,6 +202,7 @@ function load_data()
         }
         
         
+        
         function deleteComment(comment_id) {
           $.ajax({
                         type: 'POST',
@@ -209,6 +217,63 @@ function load_data()
           $('#wholecomment-'+comment_id).remove();
         }
         
+        
+        function editComment(commentId ) {
+            var span=$('#editComment-'+commentId)
+            var p=$('#contentComment-'+commentId)
+            var content;
+            
+            if(span.text()==='Edit')
+                {
+                   span.text('Save'); 
+                   content=p.text();
+                   p.html('<textarea class=\"form-control dir-auto\" id=\"commentArea-'+commentId+'\" style=\"width: 60%;\" name=\"comment\" rows=\"3\"  required=\"\">'+content+'</textarea>')
+                }
+                
+            else 
+                {
+                   span.text('Edit');
+                   content=$('#commentArea-'+commentId).val();
+                   $.ajax({
+                        type: 'POST',
+                        url: '',
+                        dataType: 'json',
+                        data:{comment_id_Edit:commentId,comment_content_Edit:content},
+                        success: function(data){
+                            }
+                        });
+                   p.html(content);
+                }
+        }
+        
+        
+        function editReply(replyId) {
+            var span=$('#editReply-'+replyId)
+            var p=$('#contentReply-'+replyId)
+            var content;
+            
+            if(span.text()==='Edit')
+                {
+                   span.text('Save'); 
+                   content=p.text();
+                   p.html('<textarea class=\"form-control dir-auto\" id=\"replyArea-'+replyId+'\" style=\"width: 60%;\" name=\"comment\" rows=\"3\"  required=\"\">'+content+'</textarea>')
+                }
+                
+            else 
+                {
+                   span.text('Edit');
+                   content=$('#replyArea-'+replyId).val();
+                   $.ajax({
+                        type: 'POST',
+                        url: '',
+                        dataType: 'json',
+                        data:{reply_id_Edit:replyId,reply_content_Edit:content},
+                        success: function(data){
+                            }
+                        });
+                   p.html(content);
+                }
+        }
         
         function deleteReply(reply_id) {
           $.ajax({
@@ -269,17 +334,5 @@ function load_data()
 
 
 }
-/*if(commentsreplies.length > 0){
-                                    commentsreplies.forEach(function(reply){
-                                        html_comm += `
-                                            <li class='list-group-item' id='rep-` + reply.id + `' style='border-radius: 3pc; margin-bottom:5px;'>
-                                                ` + commentsreplyusers[j].profileimage + `
-                                                <b style='margin:5px 0 10px 5px; position:absolute; color:black;'>` + commentsreplyusers[j].firstname + ` ` + commentsreplyusers[j].lastname + `</b></a>
-                                                <div id='reptext144' style='margin: -28px 0px 20px 75px; width: 88%; overflow-wrap: break-word; color: black; white-space: pre;'>` + reply.reply + `</div>
-                                            </li>
-                                        `;
-                                        j += 1;
-                                    });
 
-                                }*/
 ?>

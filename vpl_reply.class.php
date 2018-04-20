@@ -48,7 +48,7 @@ class mod_vpl_reply {
         $record = new stdClass();
         $record->content = $this->content;
         $record->id = $this->id;
-        $DB->insert_records('vpl_code_reply', $record);
+        $DB->update_record('vpl_code_reply', $record);
     }
 
     public function add_reply() {

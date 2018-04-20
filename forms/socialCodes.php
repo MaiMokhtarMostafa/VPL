@@ -105,6 +105,27 @@ if(isset($_POST['comment_id_delete'])){
     die();
 }
 
+
+if(isset($_POST['comment_id_Edit'])){
+    $comment_id= $_POST['comment_id_Edit'];
+    $comment = new mod_vpl_comment();
+    $comment->id=$comment_id;
+    $comment->content=$_POST['comment_content_Edit'];
+    $comment->edit_comment();
+    echo json_encode($comment);
+    die();
+}
+
+if(isset($_POST['reply_id_Edit'])){
+    $reply_id= $_POST['reply_id_Edit'];
+    $reply = new mod_vpl_reply();
+    $reply->id=$reply_id;
+    $reply->content=$_POST['reply_content_Edit'];
+    $reply->edit_reply();
+    echo json_encode($reply);
+    die();
+}
+
 if(isset($_POST['reply_id_delete'])){
     $reply_id= $_POST['reply_id_delete'];
     $reply = new mod_vpl_reply();
