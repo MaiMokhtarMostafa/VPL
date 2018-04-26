@@ -57,7 +57,7 @@ class mod_vpl_reply {
         $record->content = $this->content;
         $record->userid = $this->user->id;
         $record->vpl_code_comment_id = $this->vpl_code_comment_id;
-        $this->id= $DB->insert_record('vpl_code_reply', $record, TRUE);
+        $this->id= $DB->update_record('vpl_code_reply', $record);
         if (!$this->id) {
             return FALSE;
         } else {

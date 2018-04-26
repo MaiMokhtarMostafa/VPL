@@ -87,6 +87,24 @@ class mod_vpl_code {
         }
     }
 
+    /*
+     * This function is NOT tested and the table is NOT created 
+     * 
+    public function share_code($vpl_code_id, $userid) {
+        global $DB;
+        $record = new stdClass();
+        $record->userid = $userid;
+        $record->vpl_code_id = $vpl_code_id;
+        $shared_id = $DB->insert_record('vpl_shared_code', $record, TRUE);
+        if (!$shared_id) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    } 
+     * 
+     */
+
 }
 
 ?>
