@@ -1585,7 +1585,7 @@ class mod_vpl {
                 }
                 if ($active == 'submission.php' || $active == 'edit.php'
                     || $active == 'submissionview.php' || $active == 'gradesubmission.php'
-                    || $active == 'previoussubmissionslist.php' || $active == 'socialCodes.php' || $active== 'studentuserhelp.php' || $active == 'teacheruserhelp.php') {
+                    || $active == 'previoussubmissionslist.php' || $active == 'socialCodes.php' || $active == 'sharedCodes.php'|| $active== 'studentuserhelp.php' || $active == 'teacheruserhelp.php') {
                     $tabname = $active;
                 } else {
                     $tabname = 'test';
@@ -1618,6 +1618,7 @@ class mod_vpl {
             case 'studentuserhelp.php':
             case 'teacheruserhelp.php':
             case 'socialCodes.php' :
+            case 'sharedCodes.php' :
             case 'previoussubmissionslist.php' :
                 require_once('vpl_submission.class.php');
                 $subinstance = $this->last_user_submission( $userid );
@@ -1677,6 +1678,10 @@ class mod_vpl {
                     $strothercodes = 'User help';
                     $href = vpl_mod_href( 'forms/studentuserhelp.php', 'id', $cmid, 'userid', $userid );
                     $tabs [] = new tabobject( 'studentuserhelp.php', $href, $strothercodes,
+                        $strothercodes );
+                    $strothercodes = 'Shared codes';
+                    $href = vpl_mod_href( 'forms/sharedCodes.php', 'id', $cmid, 'userid', $userid );
+                    $tabs [] = new tabobject( 'sharedCodes.php', $href, $strothercodes,
                         $strothercodes );
                 }
                 /* End Our work */

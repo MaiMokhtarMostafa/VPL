@@ -141,6 +141,14 @@ class mod_vpl_manage_view {
         $subinstance2 = json_decode(json_encode($subinstance2), True);
         return $subinstance2['title'];
     }
+    public static function load_information_shared_codes($vpl_id,$userid)
+    {
+
+    }
+    public static function share_code($vpl_code_id,$userid)
+    {
+
+    }
 
 }
 ?>

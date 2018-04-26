@@ -3,10 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="b339c5cc-9c89-4d37-b70e-bb336a6340b4" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forms/socialCodes.php" beforeDir="false" afterPath="$PROJECT_DIR$/forms/socialCodes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/socialView.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/socialView.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vpl_comment.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/vpl_comment.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vpl_reply.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/vpl_reply.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vpl.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/vpl.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vpl_manage_view.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/vpl_manage_view.class.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,35 +21,26 @@
       <file leaf-file-name="socialCodes.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/forms/socialCodes.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="101" column="29" lean-forward="true" selection-start-line="101" selection-start-column="29" selection-end-line="101" selection-end-column="29" />
+            <state relative-caret-position="374">
+              <caret line="35" selection-start-line="35" selection-end-line="35" selection-end-column="59" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="vpl_comment.class.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vpl_comment.class.php">
+      <file leaf-file-name="vpl.class.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vpl.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
-              <caret line="70" column="26" selection-start-line="70" selection-start-column="13" selection-end-line="70" selection-end-column="26" />
+            <state relative-caret-position="27302">
+              <caret line="1619" column="29" selection-start-line="1619" selection-start-column="18" selection-end-line="1619" selection-end-column="29" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="vpl_reply.class.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vpl_reply.class.php">
+      <file leaf-file-name="sharedCodesView.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/sharedCodesView.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="235">
-              <caret line="50" column="26" selection-start-line="50" selection-start-column="26" selection-end-line="50" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="socialView.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/views/socialView.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="194">
-              <caret line="68" column="47" selection-start-line="68" selection-start-column="47" selection-end-line="68" selection-end-column="47" />
+            <state relative-caret-position="17">
+              <caret line="1" column="33" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="33" />
               <folding>
                 <element signature="e#328#335#1" expanded="true" />
                 <element signature="n#style#0;n#textarea#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -60,9 +49,64 @@
                 <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#th#0;n#tr#0;n#thead#0;n#table#0;n#div#1;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#th#1;n#tr#0;n#thead#0;n#table#0;n#div#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#th#2;n#tr#0;n#thead#0;n#table#0;n#div#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#th#3;n#tr#0;n#thead#0;n#table#0;n#div#1;n#!!top" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sharedCodes.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/forms/sharedCodes.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="930">
+              <caret line="184" column="24" selection-start-line="184" selection-start-column="24" selection-end-line="184" selection-end-column="24" />
+              <folding>
+                <element signature="n#style#0;n#td#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="vpl_code.class.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vpl_code.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="320">
+              <caret line="50" column="19" selection-start-line="50" selection-start-column="19" selection-end-line="50" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="vpl_comment.class.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vpl_comment.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="28" column="21" selection-start-line="28" selection-start-column="6" selection-end-line="28" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="vpl_manage_view.class.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/vpl_manage_view.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="473">
+              <caret line="147" column="59" lean-forward="true" selection-start-line="147" selection-start-column="59" selection-end-line="147" selection-end-column="59" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="vpl_reply.class.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vpl_reply.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="901">
+              <caret line="66" selection-start-line="59" selection-start-column="71" selection-end-line="66" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="socialView.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/socialView.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1462">
+              <caret line="86" column="34" selection-end-line="337" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -86,6 +130,9 @@
       <find>white-space</find>
       <find>Delete</find>
       <find>addComment</find>
+      <find>z</find>
+      <find>socialCodes</find>
+      <find>myModal</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -97,7 +144,6 @@
         <option value="$PROJECT_DIR$/forms/edit.php" />
         <option value="$PROJECT_DIR$/../../../vpl/vpl_code.class.php" />
         <option value="$PROJECT_DIR$/../../../vpl/vpl_manage_view.class.php" />
-        <option value="$PROJECT_DIR$/vpl.class.php" />
         <option value="$PROJECT_DIR$/classes/event/submission_grade_updated.php" />
         <option value="$PROJECT_DIR$/forms/gradesubmission.php" />
         <option value="$PROJECT_DIR$/forms/submission_form.php" />
@@ -105,14 +151,18 @@
         <option value="$PROJECT_DIR$/vpl_observer.interface.php" />
         <option value="$PROJECT_DIR$/vpl_subject.interface.php" />
         <option value="$PROJECT_DIR$/vpl_subscribee_code.class.php" />
-        <option value="$PROJECT_DIR$/vpl_manage_view.class.php" />
         <option value="$PROJECT_DIR$/vpl_subscriber_code.class.php" />
         <option value="$PROJECT_DIR$/vpl_user.class.php" />
         <option value="$PROJECT_DIR$/vpl_code.class.php" />
         <option value="$PROJECT_DIR$/vpl_comment.class.php" />
-        <option value="$PROJECT_DIR$/forms/socialCodes.php" />
         <option value="$PROJECT_DIR$/vpl_reply.class.php" />
+        <option value="$PROJECT_DIR$/forms/socialCodes.php" />
         <option value="$PROJECT_DIR$/views/socialView.php" />
+        <option value="$PROJECT_DIR$/vpl.class.php" />
+        <option value="$PROJECT_DIR$/css/sharedCodesViewStyles.css" />
+        <option value="$PROJECT_DIR$/views/sharedCodesView.php" />
+        <option value="$PROJECT_DIR$/forms/sharedCodes.php" />
+        <option value="$PROJECT_DIR$/vpl_manage_view.class.php" />
       </list>
     </option>
   </component>
@@ -125,7 +175,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="10" />
     <option name="y" value="20" />
     <option name="width" value="1346" />
@@ -144,6 +194,11 @@
             <path>
               <item name="vpl" type="b2602c69:ProjectViewProjectNode" />
               <item name="vpl" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="vpl" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vpl" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="css" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="vpl" type="b2602c69:ProjectViewProjectNode" />
@@ -210,27 +265,40 @@
       <workItem from="1523936012855" duration="3493000" />
       <workItem from="1524100755569" duration="10357000" />
       <workItem from="1524119108645" duration="260000" />
-      <workItem from="1524194311975" duration="6164000" />
+      <workItem from="1524194311975" duration="6763000" />
+      <workItem from="1524223012830" duration="92000" />
+      <workItem from="1524242624400" duration="433000" />
+      <workItem from="1524247941458" duration="749000" />
+      <workItem from="1524296385324" duration="148000" />
+      <workItem from="1524297234697" duration="113000" />
+      <workItem from="1524339407451" duration="7782000" />
+      <workItem from="1524381770930" duration="1077000" />
+      <workItem from="1524398530832" duration="5000" />
+      <workItem from="1524485538271" duration="595000" />
+      <workItem from="1524488911356" duration="211000" />
+      <workItem from="1524490137216" duration="52000" />
+      <workItem from="1524666534686" duration="206000" />
+      <workItem from="1524778959198" duration="1004000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65510000" />
+    <option name="totallyTimeSpent" value="78576000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27987897" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3419062" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -245,19 +313,19 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27155825" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.30711043" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -277,25 +345,10 @@
           <line>5</line>
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="1" />
+      <option name="time" value="2" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/forms/socialCodes.php" />
-    <entry file="file://$PROJECT_DIR$/vpl_subscribee_code.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="57" selection-start-line="4" selection-start-column="41" selection-end-line="4" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vpl_manage_view.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="38" selection-start-line="38" selection-end-line="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vpl_observer.interface.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -480,13 +533,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vpl.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="1677" column="64" selection-start-line="1677" selection-start-column="49" selection-end-line="1677" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/forms/submission.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="193">
@@ -542,10 +588,71 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vpl_manage_view.class.php">
+    <entry file="file://$PROJECT_DIR$/vpl_reply.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="42" column="56" selection-start-line="42" selection-end-line="43" />
+        <state relative-caret-position="901">
+          <caret line="66" selection-start-line="59" selection-start-column="71" selection-end-line="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/sharedCodesViewStyles.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1340">
+          <caret line="169" column="25" lean-forward="true" selection-end-line="181" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vpl.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27302">
+          <caret line="1619" column="29" selection-start-line="1619" selection-start-column="18" selection-end-line="1619" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/socialView.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1462">
+          <caret line="86" column="34" selection-end-line="337" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vpl_comment.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="28" column="21" selection-start-line="28" selection-start-column="6" selection-end-line="28" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/forms/socialCodes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="35" selection-start-line="35" selection-end-line="35" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/sharedCodesView.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="33" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="33" />
+          <folding>
+            <element signature="e#328#335#1" expanded="true" />
+            <element signature="n#style#0;n#textarea#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#1;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#0;n#tr#0;n#thead#0;n#table#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#1;n#tr#0;n#thead#0;n#table#0;n#div#1;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/forms/sharedCodes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="930">
+          <caret line="184" column="24" selection-start-line="184" selection-start-column="24" selection-end-line="184" selection-end-column="24" />
+          <folding>
+            <element signature="n#style#0;n#td#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -556,42 +663,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vpl_reply.class.php">
+    <entry file="file://$PROJECT_DIR$/vpl_manage_view.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="50" column="26" selection-start-line="50" selection-start-column="26" selection-end-line="50" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vpl_comment.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="70" column="26" selection-start-line="70" selection-start-column="13" selection-end-line="70" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/forms/socialCodes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="101" column="29" lean-forward="true" selection-start-line="101" selection-start-column="29" selection-end-line="101" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/socialView.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="68" column="47" selection-start-line="68" selection-start-column="47" selection-end-line="68" selection-end-column="47" />
-          <folding>
-            <element signature="e#328#335#1" expanded="true" />
-            <element signature="n#style#0;n#textarea#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#1;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#th#0;n#tr#0;n#thead#0;n#table#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#th#1;n#tr#0;n#thead#0;n#table#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#th#2;n#tr#0;n#thead#0;n#table#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#th#3;n#tr#0;n#thead#0;n#table#0;n#div#1;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="473">
+          <caret line="147" column="59" lean-forward="true" selection-start-line="147" selection-start-column="59" selection-end-line="147" selection-end-column="59" />
         </state>
       </provider>
     </entry>
