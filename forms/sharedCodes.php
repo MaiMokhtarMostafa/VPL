@@ -184,13 +184,13 @@ $vpl->print_view_tabs( basename( __FILE__ ) );
 
 print_header_table_share();
 // loading all public codes
-$codes = mod_vpl_manage_view::load_information_codes($current_instance->id, $userid);
+$shared_codes = mod_vpl_manage_view::load_information_shared_codes($current_instance->id, $userid);
 
-foreach($codes as $code)
+foreach($shared_codes as $code)
 {
     $desc = mod_vpl_manage_view::print_submission_Description($code->vpl_submissions_id);
     echo '<tr>';
-    echo '<td>'.$code->name.'</td>';
+    echo '<td>'.$code->userShared.' share code submited by '.$code->userOwner.'</td>';
     echo '<td id="action" style="text-align: center;">
                 <a href="javascript:LoadCode(\'' . $desc . '\', ' . $code->vpl_submissions_id . ', ' . $id . ',' . $userid . ')" title="View"><img src="../icons/view.png" alt="view"></a>';
 

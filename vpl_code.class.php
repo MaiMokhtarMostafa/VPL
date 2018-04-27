@@ -42,6 +42,8 @@ class mod_vpl_code {
     public $userId;
     public $subscribe;
     public $comments;
+    public $userShared;
+    public $userOwner;
 
     public function __construct() {
         $this->comments = array();

@@ -208,7 +208,7 @@ print_header_table();
              } else {
                 echo  '<a id="sub-href-' . $code->userId . '" href="javascript:subscribe(' . $userid . ', ' . $code->userId . ',1)" title="Subscribe"><img id="sub-image-' . $code->userId . '" src="../icons/subscribed.png" alt="Subscribe"></a>';
              }
-             echo '<a href="javascript:share_code(\''. $code->id . '\', ' .'\''. $userid . '\''.')" title="Share" style="padding:6px"><img src="../icons/share.png" alt="Share" ></a>';
+             echo '<a href="javascript:share_code('. $code->id . ','. $userid .')" title="Share" style="padding:6px"><img src="../icons/share.png" alt="Share" ></a>';
             
             echo '</td>
             </tr>';  
@@ -222,51 +222,6 @@ print_header_table();
 
 load_data();
 
-mod_vpl_manage_view::load_information_shared_codes(2,3);
-global $DB;
-/*global $DB;
-        /*$vpl_submission_id=$vpl_code_id= $DB->get_records_sql('SELECT  subscriber FROM {vpl_subscribe} WHERE subscribee = ? ',array( $userid ));
-        $vpl_submission_id = json_decode(json_encode($vpl_submission_id), True);
-        foreach($vpl_submission_id as $code)
-         {
-            echo $code['subscriber'];
-         }
-         
-        $shared_codes= $DB->get_records_sql('SELECT vpl_code_id FROM {vpl_share} WHERE userid = ?',array( $code['subscriber'] =4));
-        $shared_codes = json_decode(json_encode($shared_codes), True);
-        foreach($shared_codes as $shared_code)
-         {
-            echo ($shared_code['vpl_code_id']) ;   
-        }
-        
-        $vpl_submission_ids=$vpl_code_id= $DB->get_records_sql('SELECT  vpl_submissions_id FROM {vpl_code} WHERE id = ? ',array( $shared_code['vpl_code_id'] =2));
-        $vpl_submission_ids = json_decode(json_encode($vpl_submission_ids), True);
-        foreach($vpl_submission_ids as $vpl_submission_id)
-         {
-            echo ($vpl_submission_id['vpl_submissions_id']) ;   
-        }
-        
-        $userids= $DB->get_records_sql('SELECT userid  FROM {vpl_submissions} WHERE id = ? and vpl = ?',array( $vpl_submission_id['vpl_submission_id']=14,$vpl_id=2));
-        $userids = json_decode(json_encode($userids), True);
-        foreach($userids as $userid)
-         {
-            echo ($userid['userid']) ;   
-        }
-        
-        $users= $DB->get_records_sql('SELECT firstname , lastname  FROM {user} WHERE id = ? ',array( $userid['userid']=4));
-        $users = json_decode(json_encode($users), True);
-        foreach($users as $user)
-         {
-            echo ($user['firstname'].$user['lastname']) ;   
-        }*/
-        
 
-        //$vpl_submission_id=$vpl_code_id= $DB->get_records_sql('SELECT  vpl_submission_id FROM {mdl_vpl_code} WHERE id = ? ',array( $vpl_id ));
-        //$vpl_submission_id = json_decode(json_encode($vpl_submission_id), True);
-        //$vpl_submission_id=$vpl_submission_id[$userid]['id'];
-/*
- * 
- */
-mod_vpl_manage_view::share_code(4, 5);
     
 $vpl->print_footer();
