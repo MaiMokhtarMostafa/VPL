@@ -170,7 +170,6 @@ class mod_vpl_manage_view {
                             ) );
                             $vpl_submission = json_decode(json_encode($vpl_submission), True);
                             
-                            echo 'sadsj';
                              $user = $DB->get_record( 'user', array (
                             'id' => $vpl_submission['userid']
                             ) );
@@ -182,9 +181,16 @@ class mod_vpl_manage_view {
                             $code->userShared= $userShared['firstname']." ".$userShared['lastname'];
                             $code->vpl_submissions_id=$vpl_submission['id'];
                             $code->userId=$user['id'];
+                            if(in_array($code->userId, $subscribers))
+                            {
+                                $code->subscribe=1;
+                            }
+                            else
+                            {
+                                $code->subscribe=0;
+                            }
                             $sharedCodesArr[]=$code;
-                                                 
-                            
+
                         }
             }
                             
@@ -211,10 +217,10 @@ class mod_vpl_manage_view {
            
          
     }
-    public static function get_last_code_publish($vpl_id,$userid)
+    public static function get_last_code_publish($userid)
     {
         global $DB;
-        $temps = $DB->get_records_sql('SELECT  * FROM {vpl_submissions} WHERE userid = ? AND vpl = ? ORDER BY id desc LIMIT 1', array( $userid , $vpl_id));
+        $temps = $DB->get_records_sql('SELECT  * FROM {vpl_submissions} WHERE userid = ?  ORDER BY id desc LIMIT 1', array( $userid ));
         foreach ($temps as $temp)
         {
             $vpl_submission =$temp;
@@ -235,6 +241,8 @@ class mod_vpl_manage_view {
             $code->time   = $item_of_information_code['time'];
             $code->vpl_submissions_id = $item_of_information_code['vpl_submissions_id'];
             $code->discrption=$item_of_information_code['discrption'];
+            $code->status=$item_of_information_code['status'];
+
 
         }
         return $code;

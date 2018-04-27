@@ -68,8 +68,8 @@ class mod_vpl_submission_form extends moodleform {
         //Status
         $radioarray = array();
         $mform->addElement('static', 'status', 'Status');
-        $radioarray[] = $mform->createElement('radio', 'status', '', get_string('public', VPL), 1, $attributes);
-        $radioarray[] = $mform->createElement('radio', 'status', '', get_string('private', VPL), 0, $attributes);
+        $radioarray[] = $mform->createElement('radio', 'status', '', get_string('public', VPL), 1, null);
+        $radioarray[] = $mform->createElement('radio', 'status', '', get_string('private', VPL), 0, null);
         $mform->addGroup($radioarray, 'radioar', '', array(' '), false);
 
 

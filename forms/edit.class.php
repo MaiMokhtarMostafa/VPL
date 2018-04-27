@@ -29,6 +29,7 @@ require_once(dirname(__FILE__).'/../locallib.php');
 require_once(dirname(__FILE__).'/../vpl.class.php');
 require_once(dirname(__FILE__).'/../vpl_submission_CE.class.php');
 require_once(dirname(__FILE__).'/../vpl_example_CE.class.php');
+require_once(dirname(__FILE__).'/../vpl_manage_view.class.php');
 class mod_vpl_edit{
     public static function filesfromide(& $postfiles) {
         $files = Array ();
@@ -71,7 +72,9 @@ class mod_vpl_edit{
 
     public static function save($vpl, $userid, & $files, $comments='') {
         global $USER;
-        if ($subid = $vpl->add_submission( $userid, $files, $comments, $errormessage )) {
+        $code=mod_vpl_manage_view::get_last_code_publish($userid);
+
+        if ($subid = $vpl->add_submission( $userid, $files,$code->title,$code->discrption,$code->status, $errormessage )) {
             $id = $vpl->get_course_module()->id;
             \mod_vpl\event\submission_uploaded::log( array (
                     'objectid' => $subid,
