@@ -142,12 +142,55 @@ class mod_vpl_manage_view {
         return $subinstance2['title'];
     }
     public static function load_information_shared_codes($vpl_id,$userid)
-    {
-
+    {   
+        global $DB;
+        $arr = array();
+        $vpl_submission_id=$vpl_code_id= $DB->get_records_sql('SELECT  subscriber FROM {vpl_subscribe} WHERE subscribee = ? ',array( $userid ));
+        $vpl_submission_id = json_decode(json_encode($vpl_submission_id), True);
+        foreach($vpl_submission_id as $code)
+         {
+            //echo $code['subscriber'];
+            $shared_codes= $DB->get_records_sql('SELECT vpl_code_id FROM {vpl_share} WHERE userid = ?',array( $code['subscriber']));
+            $shared_codes = json_decode(json_encode($shared_codes), True);
+            foreach($shared_codes as $shared_code)
+             {
+                //echo ($shared_code['vpl_code_id']) ;  
+                $vpl_submission_ids=$vpl_code_id= $DB->get_records_sql('SELECT  vpl_submissions_id FROM {vpl_code} WHERE id = ? ',array( $shared_code['vpl_code_id']));
+                $vpl_submission_ids = json_decode(json_encode($vpl_submission_ids), True);
+                foreach($vpl_submission_ids as $vpl_submission_id)
+                 {
+                    //echo ($vpl_submission_id['vpl_submissions_id']) ;  
+                    $userids= $DB->get_records_sql('SELECT userid  FROM {vpl_submissions} WHERE id = ? and vpl = ?',array( $vpl_submission_id['vpl_submission_id'],$vpl_id));
+                    $userids = json_decode(json_encode($userids), True);
+                    foreach($userids as $userid)
+                     {
+                        //echo ($userid['userid']) ;  
+                        $users= $DB->get_records_sql('SELECT firstname , lastname  FROM {user} WHERE id = ? ',array( $userid['userid']));
+                        $users = json_decode(json_encode($users), True);
+                        foreach($users as $user)
+                         {
+                            echo ($user['firstname'].$user['lastname']) ;   
+                        }
+                    }
+                 }
+             }
+         }
+         
+        
     }
     public static function share_code($vpl_code_id,$userid)
     {
-
+        global $DB;
+        $records= $DB->get_records_sql('SELECT  * FROM {vpl_share} WHERE userid = ? and vpl_code_id = ?',array( $userid,$vpl_code_id ));
+        $records = json_decode(json_encode($records), True);
+        if(sizeof($records)==0)
+        {
+            $record = new stdClass();
+            $record->userid=$userid;//$userid
+            $record->vpl_code_id = $vpl_code_id;//$vpl_code_id
+            $DB->insert_record('vpl_shared', $record,TRUE);  
+        }     
+         
     }
 
 }

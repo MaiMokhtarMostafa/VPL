@@ -309,6 +309,52 @@ function load_data()
                 $('#sub-href-' + user_id).attr('title', 'Subscribe');
             }
         }
+        
+
+        function load_information_shared_codes(vpl_id,userid) {
+          var content=$('#comment').val();
+          var id=$('#val_submission_id').val();
+          $.ajax({
+                        type: 'POST',
+                        url: '',
+                        dataType: 'json',
+                        data:{content_to_add:content ,val_submission_add_comment:id},
+                        success: function(comment){
+                            var html_comm = '';
+                            html_comm += `
+                                    <li class='list-group-item' id='wholecomment-` + comment.id + `' style='border-radius: 3pc; margin-bottom:5px;'>
+                                        ` + comment.user.profileimage + `
+                                        <b style='margin:5px 0 10px 5px; position:absolute; color:black;'>` + comment.user.firstname + ` ` + comment.user.lastname + `</b></a><br>
+                                        <div id='comment-` + comment.id+ `' style='margin: -28px 0px 0px 75px; width: 88%; overflow-wrap: break-word; color: black;'><pre id='contentComment-`+comment.id+`'>` + comment.content + `</pre><br><span style='color:blue; cursor:pointer;' onclick='load_Replies(`+comment.id+`)')>Replies</span>
+                                `;
+                                if(comment.user.id==".$USER->id.")
+                                    {
+                                        html_comm +=`
+                                  <span style='color:red; cursor:pointer; margin-left: 10px;' onclick='deleteComment(`+comment.id+`)')>Delete</span>
+                                  <span style='color:green; cursor:pointer; margin-left: 10px;' id='editComment-`+comment.id+`' onclick='editComment(`+comment.id+`)')>Edit</span>
+                                `;
+                                    }
+                                    html_comm +=`
+                                  </div>
+                                        <ul class='list-group' style='margin: 10px;' id='repcomment-`+comment.id+`'></ul>
+                                    </li>
+                                `;
+
+                                $('#commList').append(html_comm);
+                                $('#comment').val('');
+                            }
+                        }); 
+          
+        }
+
+        function share_code(vpl_code_id,userid){
+            $.ajax({
+                type: 'POST',
+                url: '',
+                data:{vpl_code_id_to_share:vpl_code_id,user_id:userid}
+            });
+        }
+        
     </script>
 ";
 
